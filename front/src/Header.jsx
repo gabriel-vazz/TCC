@@ -32,7 +32,7 @@ const Header = () => {
                 </Link>
                 
                 <div className="links">
-                    <Link to='/profilePage'>
+                    <Link to='/myProfile'>
                         <button className="link">
                             :: perfil ::
                         </button>

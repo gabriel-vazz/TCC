@@ -284,7 +284,6 @@ body {
     margin-left: 25px;
     margin-top: 20px;
 }
-
 .columnSong {
     background-color: #0f0916;
     padding: 8px;
@@ -292,13 +291,82 @@ body {
     width: 750px;
     margin-bottom: 8px;
 }
-
 .columnSongName {
     font-size: 20px;
     color: white;
     text-align: left;
     margin-left: 15px;
 }
+.profilePage {
+    margin-left: 25px;
+}
+.profileContainer {
+    background-color: #0f0916;
+    padding: 12px;
+    width: 666px;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 50px;
+}
+.profileName {
+    color: white;
+    font-size: 69px;
+    margin-top: -18px;
+}
+.profileDescription {
+    color: white;
+    font-size: 20px;
+}
+.editProfileButton {
+    font-size: 21px;
+    margin-right: 8px;
+}
+
+
+
+
+
+/* EDITAR PERFIL */
+
+.editProfile {
+    color: #fff0aa;
+    font-size: 30px;
+    margin-left: 25px;
+    margin-bottom: 15px;
+}
+.editProfileInput {
+    background-color: #301566;
+    color: white;
+    padding-left: 10px;
+    margin-left: 25px;
+    font-size: 30px;
+    border-width: 0px;
+    height: 45px;
+    width: 603px;
+    margin-bottom: 5px;
+}
+.editDescriptionInput {
+    background-color: #301566;
+    color: white;
+    font-size: 20px;
+    border-width: 0px;
+    padding: 8px;
+    margin-left: 25px;
+}
+.saveChangesButton {
+    background-color: #4b0000;
+    color: #fff0aa;
+    border-radius: 5px;
+    border-width: 0px;
+    height: 50px;
+    width: 180px;
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-style: italic;
+    margin-left: 25px;
+    margin-top: 15px;
+}
+
 
 
 
@@ -342,4 +410,7 @@ body {
     font-size: 20px;
     border-width: 0px;
     padding: 8px;
+}
+textarea {
+    resize: none;
 }
