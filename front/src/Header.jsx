@@ -20,7 +20,7 @@ const Header = () => {
 
     const logOut = () => {
         axios.get('http://localhost:3000/logout').then((response) => {
-            window.location.reload(false)
+            navigate('/')
         })
     }
 
@@ -28,7 +28,7 @@ const Header = () => {
         <div className="headerContainer">
             <div className="header"> 
                 <Link to='http://localhost:5173/home'>
-                    <img src={logo} height="115" />
+                    <img src={logo} height="125" />
                 </Link>
                 
                 <div className="links">

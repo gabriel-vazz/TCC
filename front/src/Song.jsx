@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-import { useLocation, Link } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 
 import AudioPlayer from 'react-h5-audio-player'
 import './audioplayer.css'
@@ -12,8 +12,7 @@ import Header from './Header'
 
 const Song = () => {
 
-    const location = useLocation()
-    const id = location.state.data
+    const { id } = useParams()
 
     const [songData, setSongData] = useState([])
     const [genres, setGenres] = useState([])
@@ -93,10 +92,7 @@ const Song = () => {
             <div className="songGenres">
                 {genres.map((genre) => {
                     return (
-                        <Link  
-                            to='/genre' state={{ data: genre.id }}
-                            style={{ textDecoration: 'none' }}
-                        >
+                        <Link to={`/genre/${genre.id}`} style={{ textDecoration: 'none' }}>
                             <div className="songGenre">
                                 {genre.nome}
                             </div>
@@ -107,38 +103,35 @@ const Song = () => {
 
             {songData.map((song) => {
                 return (
-                    <div>
-                        <div className="bigSong">
-                            <img 
-                                src={`http://localhost:3000/sources/${song.capa}`} 
-                                height={350}
-                                width={350}
-                            />
-                            
-                            <div style={{ paddingLeft: 30 }}>
-                                <div className="bigSongNames">
-                                    <div>
-                                        <div className="bigSongName">{song.nome}</div>
-                                        <div className="bigSongArtistName">{song.usuario}</div>
-                                    </div>
+                    <div className="bigSong">
+                        <img 
+                            src={`http://localhost:3000/sources/${song.capa}`} 
+                            height={350} width={350}
+                        /> 
+                        <div style={{ paddingLeft: 30 }}>
+                            <div className="bigSongNames">
+                                <div>
+                                    <div className="bigSongName">{song.nome}</div>
 
-                                    <div onClick={() => handleLikeButton()}>{likeIcon}</div> 
+                                    <Link to={`/profile/${song.idusuario}`} style={{ textDecoration: 'none' }}>
+                                        <div className="bigSongArtistName">{song.usuario}</div>  
+                                    </Link> 
                                 </div>
+
+                                <div onClick={() => handleLikeButton()}>{likeIcon}</div> 
+                            </div>
                                     
-                                <AudioPlayer src={`http://localhost:3000/sources/${song.musica}`} />
+                            <AudioPlayer src={`http://localhost:3000/sources/${song.musica}`} />
 
-                                <div className="details">
-                                    {likes.length} curtidas, {comments.length} comentários
-                                </div>
+                            <div className="details">
+                                {likes.length} curtidas, {comments.length} comentários
                             </div>
                         </div>
                     </div>
                 )
             })}
 
-            <div className="comments">
-                :: comentários ::
-            </div>
+            <div className="comments">:: comentários ::</div>
 
             <textarea 
                 className="commentInput"
@@ -148,10 +141,7 @@ const Song = () => {
             ></textarea><br/>
 
             <div className="postComment">
-                <button 
-                    className="commentButton"
-                    onClick={() => postComment()}
-                >
+                <button className="commentButton" onClick={() => postComment()}>
                     COMENTAR
                 </button>
 
@@ -163,7 +153,10 @@ const Song = () => {
                     {comments.map((comment) => {
                         return (
                             <div className="comment">
-                                <div className="username">{comment.nome}</div>
+                                <Link to={`/profile/${comment.idcomentou}`} style={{ textDecoration: 'none'}}>
+                                    <div className="username">{comment.nome}</div>  
+                                </Link> 
+
                                 <div className="commentText">{comment.texto}</div>
                             </div>
                         )

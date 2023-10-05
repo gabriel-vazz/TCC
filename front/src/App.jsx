@@ -8,6 +8,7 @@ import PostSong from './PostSong'
 import Genre from './Genre'
 import Song from './Song'
 import EditProfile from './EditProfile'
+import Profile from './Profile'
 
 const App = () => {
     return (
@@ -19,16 +20,12 @@ const App = () => {
                     <Route path="/home" element={<Home />} />
                     <Route path="/myProfile" element={<MyProfile />} />
                     <Route path="/postSong" element={<PostSong />} />
-                    <Route path="/genre" element={<Genre />} />
-                    <Route path="/song" element={<Song />} />
-                    <Route path="/editProfile" element={<EditProfile />}/>
+                    <Route path="/genre/:id" element={<Genre />} />
+                    <Route path="/song/:id" element={<Song />} />
+                    <Route path="/editProfile" element={<EditProfile />} />
+                    <Route path="/profile/:id" element={<Profile />} />
                 </Routes>
             </Router>
-
-            {/*}<div style={{color: 'yellow', marginTop: 90}}>
-                stuff. <br/>
-                feito por Gabriel Vaz Lima
-            </div>{*/}
         </>
     )
 }

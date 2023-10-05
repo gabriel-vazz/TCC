@@ -13,8 +13,8 @@ const Home = () => {
     const [genres, setGenres] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:3000/login').then((response) => {
-            setUsername(response.data.user[0].nome)
+        axios.get('http://localhost:3000/users/me').then((response) => {
+            setUsername(response.data[0].nome)
         })
 
         axios.get('http://localhost:3000/songs').then((response) => {
@@ -37,17 +37,17 @@ const Home = () => {
                     {songs.map((song) => {
                         return (
                             <div className="song">
-                                <Link 
-                                    to='/song' state={{ data: song.id }}
-                                    style={{ textDecoration: 'none' }}
-                                >
+                                <Link to={`/song/${song.id}`} style={{ textDecoration: 'none' }}>
                                     <img 
                                         src={`http://localhost:3000/sources/${song.capa}`} 
                                         height={180} width={180}
                                     />
 
                                     <div className="songName">{song.nome}</div>
-                                    <div className="artistName">{song.usuario}</div>  
+                                    
+                                    <Link to={`/profile/${song.idusuario}`} style={{ textDecoration: 'none'}}>
+                                        <div className="artistName">{song.usuario}</div>  
+                                    </Link>  
                                 </Link>
                             </div>
                         )
@@ -62,11 +62,8 @@ const Home = () => {
                     {genres.map((genre) => {
                         return (
                             <div className="genreLink">
-                                <Link 
-                                    to='/genre' state={{ data: genre.id }}
-                                    style={{ textDecoration: 'none', color: 'white' }}
-                                >
-                                    -{genre.nome}
+                                <Link to={`/genre/${genre.id}`} style={{ textDecoration: 'none', color: 'white' }}>
+                                    {genre.nome}
                                 </Link>
                             </div>
                         )   

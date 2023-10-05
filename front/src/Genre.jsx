@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-import { useLocation, Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import Header from './Header'
 
 const Genre = () => {
-    
-    const location = useLocation()
-    const id = location.state.data
+
+    const { id } = useParams()
 
     const [name, setName] = useState()
     const [songs, setSongs] = useState([])
@@ -26,7 +25,7 @@ const Genre = () => {
         axios.get('http://localhost:3000/genres').then((response) => {
             setGenres(response.data)
         })
-    }, [])
+    }, [id])
 
     return (
         <div>
@@ -39,10 +38,7 @@ const Genre = () => {
                 <div className="columnSongList">
                     {songs.map((song) => {
                         return (
-                            <Link  
-                                to='/song' state={{ data: song.id }}
-                                style={{ textDecoration: 'none' }}
-                            >
+                            <Link to={`/song/${song.id}`} style={{ textDecoration: 'none' }}>
                                 <div className="columnSong">
                                     <img 
                                         src={`http://localhost:3000/sources/${song.capa}`} 
@@ -67,11 +63,10 @@ const Genre = () => {
                         return (
                             <div className="genreLink">
                                 <Link 
-                                    onClick={() => window.location.reload(false)}
-                                    to='/genre' state={{ data: genre.id }}
+                                    to={`/genre/${genre.id}`} 
                                     style={{ textDecoration: 'none', color: 'white' }}
                                 >
-                                    -{genre.nome}
+                                    {genre.nome}
                                 </Link>
                             </div>
                         )   

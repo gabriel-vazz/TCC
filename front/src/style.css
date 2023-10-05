@@ -68,7 +68,7 @@ body {
     display: flex;
     justify-content: space-between;
     height: 100px;
-    margin-bottom: 45px;
+    margin-bottom: 55px;
 }
 .link {
     font-size: 30px;
@@ -141,8 +141,9 @@ body {
     height: 360px;
 }
 .genreLink {
-    font-size: 16px;
+    font-size: 18px;
     text-align: left;
+    margin-left: 5px;
 } 
 .genreName {
     font-size: 40px;
@@ -267,10 +268,10 @@ body {
     color: #fff0aa;
     word-wrap: break-word;
     white-space: pre-wrap;
-    margin-right: 75px;
+    margin-right: 50px;
     margin-top: -190px;
     font-size: 12px;
-    width: 300px;
+    width: 350px;
 }
 
 
@@ -302,38 +303,62 @@ body {
 }
 .profileContainer {
     background-color: #0f0916;
-    padding: 12px;
-    width: 666px;
+    padding: 17px;
     display: flex;
     justify-content: space-between;
-    padding-bottom: 50px;
+    width: 740px;
+    margin-bottom: 15px;
 }
 .profileName {
-    color: white;
-    font-size: 69px;
+    color: #fff0aa;
+    font-size: 55px;
     margin-top: -18px;
+    padding-right: 20px;
+    display: flex;
 }
 .profileDescription {
     color: white;
+    font-size: 25px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    width: 525px;
+}
+.profileDetails {
+    color: white;
     font-size: 20px;
+    margin-bottom: 30px;
+}
+.profileSongs {
+    color: #fff0aa;
+    font-size: 30px;
+    margin-top: 25px;
+}
+.flag {
+    margin-left: 30px;
 }
 .editProfileButton {
-    font-size: 21px;
-    margin-right: 8px;
+    background-color: #4b0000;
+    color: #fff0aa;
+    border-radius: 5px;
+    border-width: 0px;
+    height: 50px;
+    width: 180px;
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-style: italic;
 }
-
+.noSongMessage {
+    color: gray;
+    font-size: 20px;
+    margin-top: -20px;
+    margin-bottom: 15px;
+}
 
 
 
 
 /* EDITAR PERFIL */
 
-.editProfile {
-    color: #fff0aa;
-    font-size: 30px;
-    margin-left: 25px;
-    margin-bottom: 15px;
-}
 .editProfileInput {
     background-color: #301566;
     color: white;
@@ -348,10 +373,21 @@ body {
 .editDescriptionInput {
     background-color: #301566;
     color: white;
-    font-size: 20px;
+    font-size: 15px;
     border-width: 0px;
     padding: 8px;
     margin-left: 25px;
+    margin-top: 5px;
+}
+.countrySelect {
+    margin-left: 25px;
+    background-color: #301566;
+    color: white;
+    height: 47px;
+    border-width: 0px;
+    padding-left: 10px;
+    font-size: 20px;
+    margin-top: 8px;
 }
 .saveChangesButton {
     background-color: #4b0000;
@@ -364,7 +400,17 @@ body {
     margin-bottom: 10px;
     font-style: italic;
     margin-left: 25px;
-    margin-top: 15px;
+    margin-top: 25px;
+}
+.editFlag {
+    margin-left: 525px;
+    margin-top: -46px;
+    display: flex;
+}
+.saveMessage {
+    color: #cccccc;
+    font-size: 20px;
+    margin-left: 25px;
 }
 
 

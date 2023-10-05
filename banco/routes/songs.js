@@ -7,7 +7,7 @@ const path = require('path')
 const db = mysql.createPool({
     host: '127.0.0.1',
     user: 'root',
-    password: '',
+    password: 'gabriel200612',
     database: 'stuff_db',
     multipleStatements: true
 })
@@ -58,8 +58,8 @@ router.post('/', upload.fields([
 
 router.get('/', (req, res) => {
     const sql = 
-    `SELECT musica.id, musica.nome, musica.musica, musica.capa, musica.descricao, 
-    usuario.nome AS usuario
+    `SELECT musica.id, musica.idusuario, musica.nome, musica.musica, musica.capa, musica.descricao, 
+    usuario.nome AS usuario 
     FROM musica
     JOIN usuario ON musica.idusuario = usuario.id`
 
@@ -76,7 +76,7 @@ router.get('/:id', (req, res) => {
     const id = req.params.id
 
     const sql = 
-    `SELECT musica.nome, musica.musica, musica.capa, musica.descricao, 
+    `SELECT musica.nome, musica.idusuario, musica.musica, musica.capa, musica.descricao, 
     usuario.nome AS usuario
     FROM musica
     JOIN usuario ON musica.idusuario = usuario.id
@@ -189,7 +189,8 @@ router.get('/:id/comments', (req, res) => {
     const id = req.params.id
 
     const sql = 
-    `SELECT comentario.texto, usuario.nome FROM comentario
+    `SELECT comentario.texto, comentario.idcomentou, usuario.nome 
+    FROM comentario
     JOIN usuario ON comentario.idcomentou = usuario.id
     WHERE comentario.idcomentado = ?`
 
