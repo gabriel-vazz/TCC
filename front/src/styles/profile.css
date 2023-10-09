@@ -1,0 +1,73 @@
+.columnSongList {
+    margin-left: 25px;
+    margin-top: 20px;
+}
+.columnSong {
+    background-color: #0f0916;
+    padding: 8px;
+    display: flex;
+    width: 750px;
+    margin-bottom: 8px;
+}
+.columnSongName {
+    font-size: 20px;
+    color: white;
+    text-align: left;
+    margin-left: 15px;
+}
+.profilePage {
+    margin-left: 25px;
+}
+.profileContainer {
+    background-color: #0f0916;
+    padding: 17px;
+    display: flex;
+    justify-content: space-between;
+    width: 740px;
+    margin-bottom: 15px;
+}
+.profileName {
+    color: #fff0aa;
+    font-size: 55px;
+    margin-top: -18px;
+    padding-right: 20px;
+    display: flex;
+}
+.profileDescription {
+    color: white;
+    font-size: 25px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    width: 525px;
+}
+.profileDetails {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+.profileSongs {
+    color: #fff0aa;
+    font-size: 30px;
+    margin-top: 25px;
+}
+.flag {
+    margin-left: 30px;
+}
+.followProfileButton {
+    background-color: #4b0000;
+    color: #fff0aa;
+    border-radius: 5px;
+    border-width: 0px;
+    height: 50px;
+    width: 180px;
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-style: italic;
+    margin-top: 25px;
+}
+.noSongMessage {
+    color: gray;
+    font-size: 20px;
+    margin-top: -20px;
+    margin-bottom: 15px;
+}
