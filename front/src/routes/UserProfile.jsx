@@ -17,6 +17,8 @@ const UserProfile = () => {
     const [songs, setSongs] = useState([])
     const [followers, setFollowers] = useState([])
 
+    const [friends, setFriends] = useState([])
+
     const [message, setMessage] = useState()
 
     useEffect(() => {
@@ -37,6 +39,10 @@ const UserProfile = () => {
         axios.get('http://localhost:3000/users/me/follows').then((response) => {
             setFollowers(response.data)
         })
+
+        axios.get('http://localhost:3000/users/me/friends').then((response) => {
+            setFriends(response.data)
+        })
     }, [])
 
     return (
@@ -44,50 +50,66 @@ const UserProfile = () => {
             <Header />
 
             <div className="profilePage">
-                <div className="profileContainer">
-                    <div className="profileInformation">
-                        <div className="profileName">{name}</div>
-                        <div className="profileDetails">
-                            {followers.length} seguidores, {songs.length} músicas
+                <div className="profile">
+                    <div className="profileContainer">
+                        <div className="profileInformation">
+                            <div className="profileName">{name}</div>
+
+                            <div className="profileDetails">
+                                {followers.length} seguidores, {songs.length} músicas
+                            </div>
+
+                            <div className="profileDescription">{description}</div>
                         </div>
-                        <div className="profileDescription">{description}</div>
+
+                        <div className="flag">
+                            <Flag code={country} />
+                        </div>
                     </div>
-                    <div className="flag">
-                        <Flag code={country} />
-                    </div>
-                </div>
  
-                <Link to='/editProfile'>
-                    <button className="editProfileButton">EDITAR PERFIL</button>
-                </Link>
+                    <Link to='/editProfile'>
+                        <button className="editProfileButton">EDITAR PERFIL</button>
+                    </Link>
 
-                <div className="profileSongs">:: suas músicas ::</div>
+                    <div className="profileSongs">:: suas músicas ::</div>
 
-                <div className="columnSongList" style={{marginLeft: 0}}>
-                    {songs.map((song) => {
-                        return (
-                            <Link to={`/song/${song.id}`} style={{ textDecoration: 'none' }}>
-                                <div className="columnSong">
-                                    <img 
-                                        src={`http://localhost:3000/sources/${song.capa}`} 
-                                        height={60} width={60}
-                                    />
+                    <div className="columnSongList" style={{marginLeft: 0}}>
+                        {songs.map((song) => {
+                            return (
+                                <Link to={`/song/${song.id}`} style={{ textDecoration: 'none' }}>
+                                    <div className="columnSong">
+                                        <img 
+                                            src={`http://localhost:3000/sources/${song.capa}`} 
+                                            height={60} width={60}
+                                        />
 
-                                    <div className="columnSongName">
-                                        {song.usuario} - {song.nome}
+                                        <div className="columnSongName">
+                                            {song.usuario} - {song.nome}
+                                        </div>
                                     </div>
-                                </div>
-                            </Link>
-                        )
-                    })}
-                </div>
-                <div className="noSongMessage">{message}</div>
+                                </Link>
+                            )
+                        })}
+                    </div>
 
-                <Link to='/post'>
-                    <button className="loginButton">
-                        POSTAR MÚSICA
-                    </button>
-                </Link>
+                    <div className="noSongMessage">{message}</div>
+
+                    <Link to='/post'>
+                        <button className="loginButton">
+                            POSTAR MÚSICA
+                        </button>
+                    </Link>
+                </div>
+
+                <div className="friends">
+                        :: lista de amigos ::
+
+                        <div className="friendList">
+                            {friends.map((friend) => {
+                                return <div className="friend">{friend.nome}</div>
+                            })}
+                        </div>
+                    </div>
             </div>
         </div>
     )

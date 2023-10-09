@@ -18,6 +18,8 @@ const Profile = () => {
     const [songs, setSongs] = useState([])
     const [followers, setFollowers] = useState([])
 
+    const [friends, setFriends] = useState([])
+
     const [userId, setUserId] = useState()
 
     const [message, setMessage] = useState()
@@ -35,14 +37,21 @@ const Profile = () => {
         axios.get('http://localhost:3000/users/me').then((response) => {
             setUserId(response.data[0].id)
         })
+
         axios.get(`http://localhost:3000/users/${id}`).then((response) => {
             setProfileData(response.data)
         })
+
         axios.get(`http://localhost:3000/users/${id}/songs`).then((response) => {
             setSongs(response.data)
         })
+
         axios.get(`http://localhost:3000/users/${id}/follows`).then((response) => {
             setFollowers(response.data)
+        })
+
+        axios.get('http://localhost:3000/users/me/friends').then((response) => {
+            setFriends(response.data)
         })
     }, [])
 
@@ -54,35 +63,47 @@ const Profile = () => {
                 <Header />
     
                 <div className="profilePage">
-                    {profileData.map((user) => {
-                        return (
-                            <div >
-                                <div className="profileInformation">
-                                    <div className="profileName">
-                                        {user.nome} 
-                                        <div className="flag">
-                                            <Flag code={user.pais} />
+                    <div className="profile">
+                        {profileData.map((user) => {
+                            return (
+                                <div >
+                                    <div className="profileInformation">
+                                        <div className="profileName">
+                                            {user.nome} 
+                                            <div className="flag">
+                                                <Flag code={user.pais} />
+                                            </div>
+                                        </div> 
+        
+                                        <div className="profileDetails">
+                                            {followers.length} seguidores, {songs.length} músicas
                                         </div>
-                                    </div> 
-    
-                                    <div className="profileDetails">
-                                        {followers.length} seguidores, {songs.length} músicas
+        
+                                        <div className="profileDescription">{user.descricao}</div>
                                     </div>
-    
-                                    <div className="profileDescription">{user.descricao}</div>
                                 </div>
-                            </div>
-                        )
-                    })}
+                            )
+                        })}
     
-                    <button 
-                        className="followProfileButton" 
-                        onClick={() => handleFollowButton()}
-                    >
-                        SEGUIR
-                    </button>
-    
-                    <div className="message">{message}</div>
+                        <button 
+                            className="followProfileButton" 
+                            onClick={() => handleFollowButton()}
+                        >
+                            SEGUIR
+                        </button>
+
+                        <div className="message">{message}</div>
+                    </div>
+
+                    <div className="friends">
+                        :: lista de amigos ::
+
+                        <div className="friendList">
+                            {friends.map((friend) => {
+                                return <div className="friend">{friend.nome_usuario}</div>
+                            })}
+                        </div>
+                    </div>
                 </div>
             </div>
         )

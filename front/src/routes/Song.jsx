@@ -34,6 +34,10 @@ const Song = () => {
 
     const [message, setMessage] = useState()
 
+    const handlePlayButton = async() => {
+        await axios.post('http://localhost:3000/users/songs/current', { id: id })
+    }
+
     const handleLikeButton = async() => {
         await axios.post('http://localhost:3000/songs/likes', { id: id })
 
@@ -122,7 +126,10 @@ const Song = () => {
                                 <div onClick={() => handleLikeButton()}>{likeIcon}</div> 
                             </div>
                                     
-                            <AudioPlayer src={`http://localhost:3000/sources/${song.musica}`} />
+                            <AudioPlayer 
+                                src={`http://localhost:3000/sources/${song.musica}`} 
+                                onPlay={() => handlePlayButton()}
+                            />
 
                             <div className="details">
                                 {likes.length} curtidas, {comments.length} comentários

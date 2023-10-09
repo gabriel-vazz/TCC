@@ -17,8 +17,8 @@ const usersRouter = require('./routes/users')
 const db = mysql.createPool({
     host: '127.0.0.1',
     user: 'root',
-    password: 'gabriel200612',
-    database: 'stuff_db',
+    password: '',
+    database: 'stuff',
     multipleStatements: true
 })
 

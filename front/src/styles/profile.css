@@ -17,6 +17,9 @@
 }
 .profilePage {
     margin-left: 25px;
+    margin-right: 25px;
+    display: flex;
+    justify-content: space-between;
 }
 .profileContainer {
     background-color: #0f0916;
@@ -70,4 +73,21 @@
     font-size: 20px;
     margin-top: -20px;
     margin-bottom: 15px;
+}
+.friends {
+    color: white;
+    font-size: 30px;
+    text-align: center;
+}
+.friendList {
+    margin-top: 25px;
+}
+.friend {
+    background-color: #0f0916;
+    color: #fff0aa;
+    margin-bottom: 6px;
+    padding: 8px;
+    width: 300px;
+    font-size: 20px;
+    text-align: left;
 }

@@ -6,8 +6,8 @@ const mysql = require('mysql2')
 const db = mysql.createPool({
     host: '127.0.0.1',
     user: 'root',
-    password: 'gabriel200612',
-    database: 'stuff_db',
+    password: '',
+    database: 'stuff',
     multipleStatements: true
 })
 
@@ -156,6 +156,43 @@ router.get('/:id/follows', (req, res) => {
         }
         res.json(result)
     })
+})
+
+router.get('/me/friends', (req, res) => {
+    const id = req.session.user[0].id
+
+    const sql = 
+    `SELECT seguida.idseguido, usuario.nome
+    FROM seguida
+    JOIN usuario ON seguida.idseguido = usuario.id
+    WHERE seguida.idseguiu = ?`
+
+    db.query(sql, id, (err, result) => {
+        if(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
+        res.json(result)
+    })
+})
+
+router.post('/songs/current', (req, res) => {
+    const user = req.session.user[0].id
+    const { id } = req.body
+
+    const sql = 'UPDATE usuario SET ouvindo = ? WHERE id = ?'
+
+    db.query(sql, [id, user], (err, result) => {
+        if(err) {
+            console.log(err)
+            res.sendStatus(500)
+        }
+        res.sendStatus(200)
+    })
+})
+
+router.get('/friends/:id/current', (req, res) => {
+    
 })
 
 module.exports = router
