@@ -6,7 +6,7 @@ const mysql = require('mysql2')
 const db = mysql.createPool({
   host: '127.0.0.1',
   user: 'root',
-  password: 'gabriel200612',
+  password: '',
   database: 'stuff',
   multipleStatements: true
 })
@@ -180,6 +180,25 @@ router.get('/me/friends', (req, res) => {
       res.sendStatus(500)
     }
     res.json(result)
+  })
+})
+
+router.get('/:id/followed', (req, res) => {
+  const user = req.session.user[0].id
+  const id = req.params.id
+
+  const sql = 'SELECT * FROM seguida WHERE idseguiu = ? AND idseguido = ?'
+
+  db.query(sql, [user, id], (err, result) => {
+    if (err) {
+      console.log(err)
+      res.sendStatus(500)
+    }
+    if (result.length) {
+      res.json({ followed: true })
+    } else {
+      res.json({ followed: false })
+    }
   })
 })
 

@@ -20,17 +20,28 @@ const Profile = () => {
 
   const [friends, setFriends] = useState([])
 
+  const [followButtonText, setFollowButtonText] = useState()
+  const [isFollowed, setIsFollowed] = useState()
+
   const [userId, setUserId] = useState()
 
   const [message, setMessage] = useState()
 
   const handleFollowButton = async () => {
+    if (!isFollowed) {
+      setFollowButtonText('DEIXAR DE SEGUIR')
+      setIsFollowed(true)
+    } else {
+      setFollowButtonText('SEGUIR')
+      setIsFollowed(false)
+    }
+    
     await axios.post('http://localhost:3000/users/follows', { id: id })
-      .then((response) => {
-        if (response.data.msg) {
-          setMessage(response.data.msg)
-        }
-      })
+    .then((response) => {
+      if(response.data.msg) {
+        setMessage(response.data.msg)
+      }
+    })
   }
 
   useEffect(() => {
@@ -48,6 +59,16 @@ const Profile = () => {
     })
     axios.get('http://localhost:3000/users/me/friends').then((response) => {
       setFriends(response.data)
+    })
+
+    axios.get(`http://localhost:3000/users/${id}/followed`).then((response) => {
+      if (response.data.followed) {
+        setFollowButtonText('DEIXAR DE SEGUIR')
+        setIsFollowed(true)
+      } else {
+        setFollowButtonText('SEGUIR')
+        setIsFollowed(false)
+      }
     })
   }, [])
 
@@ -85,20 +106,10 @@ const Profile = () => {
               className="followProfileButton"
               onClick={() => handleFollowButton()}
             >
-              SEGUIR
+              {followButtonText}
             </button>
 
             <div className="message">{message}</div>
-          </div>
-
-          <div className="friends">
-            :: lista de amigos ::
-
-            <div className="friendList">
-              {friends.map((friend) => {
-                return <div className="friend">{friend.nome}</div>
-              })}
-            </div>
           </div>
         </div>
       </div>
