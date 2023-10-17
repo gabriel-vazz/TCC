@@ -104,7 +104,7 @@ const UserProfile = () => {
         </div>
 
         <div className="friends">
-          :: lista de amigos ::
+          :: seguido por você ::
           <div className="friendList">
             {friends.map((friend) => {
               if (friend.id_musica != null) {

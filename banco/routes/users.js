@@ -122,12 +122,6 @@ router.post('/follows', (req, res) => {
   const user = req.session.user[0].id
   const { id } = req.body
 
-  var name = ''
-
-  db.query('SELECT nome FROM usuario WHERE id = ?', id, (err, result) => {
-    name = result[0].nome
-  })
-
   db.query('SELECT * FROM seguida WHERE idseguiu = ? AND idseguido = ?',
     [user, id], (err, result) => {
       if (err) {
@@ -136,11 +130,10 @@ router.post('/follows', (req, res) => {
       }
       if (result.length) {
         db.query('DELETE FROM seguida WHERE idseguiu = ? AND idseguido = ?', [user, id])
-        res.json({ msg: `você deixou de seguir ${name}` })
       } else {
         db.query('INSERT INTO seguida(idseguiu, idseguido) VALUES (?, ?)', [user, id])
-        res.json({ msg: `você começou a seguir ${name}` })
       }
+      res.sendStatus(200)
     })
 })
 
