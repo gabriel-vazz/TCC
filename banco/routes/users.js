@@ -6,7 +6,7 @@ const mysql = require('mysql2')
 const db = mysql.createPool({
   host: '127.0.0.1',
   user: 'root',
-  password: '',
+  password: 'gabriel200612',
   database: 'stuff',
   multipleStatements: true
 })
@@ -156,9 +156,9 @@ router.get('/me/friends', (req, res) => {
 
   const sql =
     `SELECT 
-	  usuario.id AS id_usuario, usuario.nome AS nome_usuario,
-	  musica.id AS id_musica, musica.nome AS nome_musica,
-	  usuario_artista.nome AS nome_artista
+      usuario.id AS id_usuario, usuario.nome AS nome_usuario,
+      musica.id AS id_musica, musica.nome AS nome_musica,
+      usuario_artista.nome AS nome_artista
     FROM usuario
     
     LEFT JOIN musica ON usuario.ouvindo = musica.id
@@ -172,7 +172,13 @@ router.get('/me/friends', (req, res) => {
       console.log(err)
       res.sendStatus(500)
     }
-    res.json(result)
+    if(!result.length) {
+      res.json({ msg: 'siga seus amigos para saber o que eles estão ouvindo!' })
+      .status(204)
+    } else {
+      res.json(result)
+      .status(200)
+    }
   })
 })
 

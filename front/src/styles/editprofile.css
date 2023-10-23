@@ -1,59 +1,65 @@
 .editProfile {
-    color: #fff0aa;
-    margin-left: 25px;
-    font-size: 30px;
-    margin-bottom: 20px;
+  color: #fff0aa;
+  margin-left: 25px;
+  font-size: 30px;
+  margin-bottom: 20px;
 }
+
 .editProfileInput {
-    background-color: #301566;
-    color: white;
-    padding-left: 10px;
-    margin-left: 25px;
-    font-size: 30px;
-    border-width: 0px;
-    height: 45px;
-    width: 603px;
-    margin-bottom: 5px;
+  background-color: #301566;
+  color: white;
+  padding-left: 10px;
+  margin-left: 25px;
+  font-size: 30px;
+  border-width: 0px;
+  height: 45px;
+  width: 603px;
+  margin-bottom: 5px;
 }
+
 .editDescriptionInput {
-    background-color: #301566;
-    color: white;
-    font-size: 15px;
-    border-width: 0px;
-    padding: 8px;
-    margin-left: 25px;
-    margin-top: 5px;
+  background-color: #301566;
+  color: white;
+  font-size: 15px;
+  border-width: 0px;
+  padding: 8px;
+  margin-left: 25px;
+  margin-top: 5px;
 }
+
 .countrySelect {
-    margin-left: 25px;
-    background-color: #301566;
-    color: white;
-    height: 47px;
-    border-width: 0px;
-    padding-left: 10px;
-    font-size: 20px;
-    margin-top: 8px;
+  margin-left: 25px;
+  background-color: #301566;
+  color: white;
+  height: 47px;
+  border-width: 0px;
+  padding-left: 10px;
+  font-size: 20px;
+  margin-top: 8px;
 }
+
 .saveChangesButton {
-    background-color: #4b0000;
-    color: #fff0aa;
-    border-radius: 5px;
-    border-width: 0px;
-    height: 50px;
-    width: 180px;
-    font-size: 20px;
-    margin-bottom: 10px;
-    font-style: italic;
-    margin-left: 25px;
-    margin-top: 25px;
+  background-color: #4b0000;
+  color: #fff0aa;
+  border-radius: 5px;
+  border-width: 0px;
+  height: 50px;
+  width: 180px;
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-style: italic;
+  margin-left: 25px;
+  margin-top: 25px;
 }
+
 .editFlag {
-    margin-left: 525px;
-    margin-top: -46px;
-    display: flex;
+  margin-left: 525px;
+  margin-top: -46px;
+  display: flex;
 }
+
 .saveMessage {
-    color: #cccccc;
-    font-size: 20px;
-    margin-left: 25px;
+  color: #cccccc;
+  font-size: 20px;
+  margin-left: 25px;
 }

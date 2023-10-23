@@ -4,9 +4,11 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 import { FaMusic } from 'react-icons/fa'
+import { BsFillTrashFill } from 'react-icons/bs'
 
 import Flag from '../components/Flag'
 import Header from '../components/Header'
+import DeleteMessage from '../components/DeleteMessage'
 
 import '../styles/userprofile.css'
 
@@ -21,7 +23,13 @@ const UserProfile = () => {
 
   const [friends, setFriends] = useState([])
 
-  const [message, setMessage] = useState()
+  const [noSongMessage, setNoSongMessage] = useState()
+  const [noFriendsMessage, setNoFriendsMessage] = useState()
+  
+  const [deleteSongId, setDeleteSongId] = useState()
+  const deleteSongIconStyle = {
+    color: '#ff6969', height: 40, width: 40, marginTop: 5
+  }
 
   useEffect(() => {
     axios.get('http://localhost:3000/users/me').then((response) => {
@@ -32,7 +40,7 @@ const UserProfile = () => {
 
     axios.get('http://localhost:3000/users/me/songs').then((response) => {
       if (response.data.msg) {
-        setMessage(response.data.msg)
+        setNoSongMessage(response.data.msg)
       } else {
         setSongs(response.data)
       }
@@ -43,7 +51,11 @@ const UserProfile = () => {
     })
 
     axios.get('http://localhost:3000/users/me/friends').then((response) => {
-      setFriends(response.data)
+      if(response.data.msg) {
+        setNoFriendsMessage(response.data.msg)
+      } else {
+        setFriends(response.data)
+      }
     })
   }, [])
 
@@ -78,23 +90,36 @@ const UserProfile = () => {
           <div className="columnSongList" style={{ marginLeft: 0 }}>
             {songs.map((song) => {
               return (
-                <Link to={`/song/${song.id}`} style={{ textDecoration: 'none' }}>
+                <div>
                   <div className="columnSong">
-                    <img
-                      src={`http://localhost:3000/sources/${song.capa}`}
-                      height={60} width={60}
-                    />
+                    <Link to={`/song/${song.id}`} style={{ textDecoration: 'none' }}>
+                      <div className="columnSongInfo">
+                        <img
+                          src={`http://localhost:3000/sources/${song.capa}`}
+                          height={60} width={60}
+                        />
 
-                    <div className="columnSongName">
-                      {song.usuario} - {song.nome}
-                    </div>
+                        <div className="columnSongName">
+                          {song.usuario} - {song.nome}
+                        </div>
+                      </div>
+                    </Link> 
+
+                    <button 
+                      className="deleteSongButton"
+                      onClick={() => setDeleteSongId(song.id)}
+                    >
+                      <BsFillTrashFill style={deleteSongIconStyle}/>
+                    </button>
                   </div>
-                </Link>
+
+                  <DeleteMessage songId={song.id} deleteId={deleteSongId} />
+                </div>
               )
             })}
           </div>
 
-          <div className="noSongMessage">{message}</div>
+          <div className="noSongMessage">{noSongMessage}</div>
 
           <Link to='/post'>
             <button className="loginButton">
@@ -123,7 +148,8 @@ const UserProfile = () => {
                           to={`/song/${friend.id_musica}`}
                           style={{ textDecoration: 'none', color: 'white' }}
                         >
-                          <FaMusic style={{ marginRight: 6 }}/> {friend.nome_artista} - {friend.nome_musica} 
+                          <FaMusic style={{ marginRight: 6 }} /> 
+                          {friend.nome_artista} - {friend.nome_musica} 
                         </Link>
                       </div>
                     </div>
@@ -143,6 +169,8 @@ const UserProfile = () => {
               }
             })}
           </div>
+
+          <div className="noFriendsMessage">{noFriendsMessage}</div>
         </div>
       </div>
     </div>

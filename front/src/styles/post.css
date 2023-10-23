@@ -1,34 +1,39 @@
 .postSongInput {
-    background-color: #301566;
-    color: white;
-    font-size: 30px;
-    border-width: 0px;
-    height: 45px;
-    width: 720px;
-    margin-bottom: 5px;
+  background-color: #301566;
+  color: white;
+  font-size: 30px;
+  border-width: 0px;
+  height: 45px;
+  width: 720px;
+  margin-bottom: 5px;
 }
+
 .postSongFields {
-    color: #fff0aa;
-    font-size: 30px;
-    margin-bottom: 13px;
+  color: #fff0aa;
+  font-size: 30px;
+  margin-bottom: 13px;
 }
+
 .postSongText {
-    color: white;
-    font-size: 20px;
-    margin-left: 25px;
+  color: white;
+  font-size: 20px;
+  margin-left: 25px;
 }
+
 .postSongGenre {
-    color: white;
-    font-size: 18px;
-    display: flex;
+  color: white;
+  font-size: 18px;
+  display: flex;
 }
+
 .songDescriptionInput {
-    background-color: #301566;
-    color: white;
-    font-size: 20px;
-    border-width: 0px;
-    padding: 8px;
+  background-color: #301566;
+  color: white;
+  font-size: 20px;
+  border-width: 0px;
+  padding: 8px;
 }
+
 textarea {
-    resize: none;
+  resize: none;
 }

@@ -7,43 +7,43 @@ import logo from './logo.png'
 import '../styles/header.css'
 
 const Header = () => {
-    
-    axios.defaults.withCredentials = true
-    const navigate = useNavigate()
 
-    useEffect(() => {
-        axios.get('http://localhost:3000/login').then((response) => {
-            if(!response.data.logged) {
-                navigate('/login')
-            }
-        })  
-    }, [])
+  axios.defaults.withCredentials = true
+  const navigate = useNavigate()
 
-    const logOut = async() => {
-        await axios.get('http://localhost:3000/logout').then((response) => {
-            navigate('/login')
-        })
-    }
+  useEffect(() => {
+    axios.get('http://localhost:3000/login').then((response) => {
+      if (!response.data.logged) {
+        navigate('/login')
+      }
+    })
+  }, [])
 
-    return (
-        <div className="headerContainer">
-            <div className="header"> 
-                <Link to='http://localhost:5173/'>
-                    <img src={logo} height="125" />
-                </Link>
-                
-                <div className="links">
-                    <Link to='/profile/me'>
-                        <button className="link">:: perfil ::</button>
-                    </Link>
+  const logOut = async () => {
+    await axios.get('http://localhost:3000/logout').then((response) => {
+      navigate('/login')
+    })
+  }
 
-                    <button className="link" onClick={() => logOut()}>
-                        :: encerrar sessão ::
-                    </button>
-                </div>
-            </div>
+  return (
+    <div className="headerContainer">
+      <div className="header">
+        <Link to='http://localhost:5173/'>
+          <img src={logo} height="125" />
+        </Link>
+
+        <div className="links">
+          <Link to='/profile/me'>
+            <button className="link">:: perfil ::</button>
+          </Link>
+
+          <button className="link" onClick={() => logOut()}>
+            :: encerrar sessão ::
+          </button>
         </div>
-    )
+      </div>
+    </div>
+  )
 }
 
 export default Header

@@ -7,9 +7,8 @@ import AudioPlayer from 'react-h5-audio-player'
 import '../styles/audioplayer.css'
 import '../styles/song.css'
 
-import { BiSolidHeartCircle, BiHeartCircle } from 'react-icons/bi'
-
 import Header from '../components/Header'
+import Like from '../components/Like'
 
 const Song = () => {
 
@@ -21,33 +20,11 @@ const Song = () => {
   const [likes, setLikes] = useState([])
   const [description, setDescription] = useState()
 
-  const [likeIcon, setLikeIcon] = useState()
-  const [isLiked, setIsLiked] = useState()
-  const likeIconStyle = {
-    color: '#ff6969',
-    height: 69,
-    width: 69,
-    marginTop: 15
-  }
-
   const [comment, setComment] = useState()
-
   const [message, setMessage] = useState()
 
   const handlePlayButton = async () => {
     await axios.post('http://localhost:3000/users/songs/current', { id: id })
-  }
-
-  const handleLikeButton = async () => {
-    await axios.post('http://localhost:3000/songs/likes', { id: id })
-
-    if (!isLiked) {
-      setLikeIcon(<BiSolidHeartCircle style={likeIconStyle} />)
-      setIsLiked(true)
-    } else {
-      setLikeIcon(<BiHeartCircle style={likeIconStyle} />)
-      setIsLiked(false)
-    }
   }
 
   const postComment = async () => {
@@ -65,25 +42,12 @@ const Song = () => {
     axios.get(`http://localhost:3000/songs/${id}/genres`).then((response) => {
       setGenres(response.data)
     })
-
     axios.get(`http://localhost:3000/songs/${id}/likes`).then((response) => {
       setLikes(response.data)
     })
-
-    axios.get(`http://localhost:3000/songs/${id}/liked`).then((response) => {
-      if (response.data.liked) {
-        setLikeIcon(<BiSolidHeartCircle style={likeIconStyle} />)
-        setIsLiked(true)
-      } else {
-        setLikeIcon(<BiHeartCircle style={likeIconStyle} />)
-        setIsLiked(false)
-      }
-    })
-
     axios.get(`http://localhost:3000/songs/${id}/comments`).then((response) => {
       setComments(response.data)
     })
-
     axios.get(`http://localhost:3000/songs/${id}`).then((response) => {
       setSongData(response.data)
       setDescription(response.data[0].descricao)
@@ -123,7 +87,7 @@ const Song = () => {
                   </Link>
                 </div>
 
-                <div onClick={() => handleLikeButton()}>{likeIcon}</div>
+                <Like id={id} />
               </div>
 
               <AudioPlayer

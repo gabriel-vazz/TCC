@@ -1,72 +1,82 @@
 .welcome {
-    font-size: 40px;
-    color: white;
-    text-align: center;
-    margin-bottom: 50px;
+  font-size: 40px;
+  color: white;
+  text-align: center;
+  margin-bottom: 50px;
 }
+
 .home {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
+
 .songs {
-    display: flex;
-    flex-wrap: wrap;
-    width: 1000px;
-    margin-left: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 1000px;
+  margin-left: 25px;
 }
+
 .song {
-    background-color: #0f0916;
-    margin-right: 7px;
-    width: calc(25% - 50px);
-    text-align: center;
-    margin-bottom: 30px;
-    padding: 8px;
-    height: 280px;
+  background-color: #0f0916;
+  margin-right: 7px;
+  width: calc(25% - 50px);
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 8px;
+  height: 280px;
 }
+
 .songName {
-    font-size: 20px;
-    color:white;
-    text-align: left;
-    margin-left: 4px;
+  font-size: 20px;
+  color: white;
+  text-align: left;
+  margin-left: 4px;
 }
+
 .artistName {
-    font-size: 18px;
-    color: #fff0aa;
-    text-align: left;
-    margin-left: 4px;
+  font-size: 18px;
+  color: #fff0aa;
+  text-align: left;
+  margin-left: 4px;
 }
+
 .genres {
-    color: #fff0aa;
-    text-align: left;
-    font-size: 35px;
-    margin-bottom: 20px;
-    margin-left: 5px;
+  color: #fff0aa;
+  text-align: left;
+  font-size: 35px;
+  margin-bottom: 20px;
+  margin-left: 5px;
 }
+
 .genreLinks {
-    background-color: #0f0916;
-    text-align: left;
-    margin-right: 30px;
-    width: 250px;
-    padding: 8px;
-    height: 360px;
+  background-color: #0f0916;
+  text-align: left;
+  margin-right: 30px;
+  width: 250px;
+  padding: 8px;
+  height: 360px;
 }
+
 .genreLink {
-    font-size: 18px;
-    text-align: left;
-    margin-left: 5px;
-} 
-.genreName {
-    font-size: 50px;
-    color: #fff0aa;
-    text-align: left;
-    margin-left: 25px;
-    display: flex;
+  font-size: 18px;
+  text-align: left;
+  margin-left: 5px;
 }
+
+.genreName {
+  font-size: 50px;
+  color: #fff0aa;
+  text-align: left;
+  margin-left: 25px;
+  display: flex;
+}
+
 .genreDetails {
-    font-size: 25px;
-    text-align: left;
-    color: #b6b6b6;
-    display: flex;
-    margin-left: 25px;
-    margin-bottom: 15px;    
+  font-size: 25px;
+  text-align: left;
+  color: #b6b6b6;
+  display: flex;
+  margin-left: 25px;
+  margin-bottom: 15px;
 }

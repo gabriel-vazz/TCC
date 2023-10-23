@@ -17,14 +17,14 @@ const usersRouter = require('./routes/users')
 const db = mysql.createPool({
   host: '127.0.0.1',
   user: 'root',
-  password: '',
+  password: 'gabriel200612',
   database: 'stuff',
   multipleStatements: true
 })
 
 app.use(cors({
   origin: ["http://localhost:5173"],
-  methods: ["GET", "POST"],
+  methods: ["GET", "POST", "DELETE"],
   credentials: true
 }))
 app.use(cookieParser())

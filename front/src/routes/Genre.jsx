@@ -17,11 +17,9 @@ const Genre = () => {
     axios.get(`http://localhost:3000/genres/${id}`).then((response) => {
       setName(response.data[0].nome)
     })
-
     axios.get(`http://localhost:3000/genres/${id}/songs`).then((response) => {
       setSongs(response.data)
     })
-
     axios.get('http://localhost:3000/genres').then((response) => {
       setGenres(response.data)
     })

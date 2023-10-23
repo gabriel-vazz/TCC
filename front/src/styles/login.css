@@ -1,50 +1,59 @@
 body {
-    background-color: black;
-    padding-bottom: 100px;
+  background-color: black;
+  padding-bottom: 100px;
 }
+
 .login {
-    font-size: 40px;
-    color:#fff0aa;
-    text-align: center;
+  font-size: 40px;
+  color: #fff0aa;
+  text-align: center;
 }
+
 .logo {
-    margin-top: 20px;
-    height: 200px;
+  margin-top: 20px;
+  height: 200px;
 }
+
 .loginInput {
-    background-color: #300666;
-    color: white;
-    border-radius: 5px;
-    border-width: 0px;
-    height: 30px;
-    width: 280px;
-    font-size: 20px;
-    margin-top: 15px;
-    text-align: center;
-} 
-::placeholder {color: white}
+  background-color: #300666;
+  color: white;
+  border-radius: 5px;
+  border-width: 0px;
+  height: 30px;
+  width: 280px;
+  font-size: 20px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+::placeholder {
+  color: white
+}
 
 .loginButton {
-    background-color: #4b0000;
-    color: #fff0aa;
-    border-radius: 5px;
-    border-width: 0px;
-    height: 50px;
-    width: 180px;
-    font-size: 20px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-style: italic;
+  background-color: #4b0000;
+  color: #fff0aa;
+  border-radius: 5px;
+  border-width: 0px;
+  height: 50px;
+  width: 180px;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-style: italic;
 }
+
 .createAccount {
-    color: #1f1eff;
-    font-size: 20px;
+  color: #1f1eff;
+  font-size: 20px;
 }
+
 .error {
-    font-size:15px;
-    color: #cccccc
+  font-size: 15px;
+  color: #cccccc
 }
+
 .message {
-    font-size: 20px;
-    color: #cccccc;
+  font-size: 20px;
+  color: #cccccc;
 }

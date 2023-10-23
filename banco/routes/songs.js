@@ -7,7 +7,7 @@ const path = require('path')
 const db = mysql.createPool({
   host: '127.0.0.1',
   user: 'root',
-  password: '',
+  password: 'gabriel200612',
   database: 'stuff',
   multipleStatements: true
 })
@@ -88,6 +88,25 @@ router.get('/:id', (req, res) => {
       res.sendStatus(500)
     }
     res.json(result)
+  })
+})
+
+router.delete('/:id', (req, res) => {
+  const id = req.params.id
+
+  const sql = 
+    `DELETE FROM musica_genero WHERE idmusica = ?;
+    UPDATE usuario SET ouvindo = null WHERE ouvindo = ?;
+    DELETE FROM comentario WHERE idcomentado = ?;
+    DELETE FROM curtida WHERE idcurtido = ?;
+    DELETE FROM musica WHERE id = ?;`
+    
+  db.query(sql, [id, id, id, id, id], (err, results) => {
+    if(err) {
+      console.log(err)
+      res.json({ msg: 'erro ao excluir música' })
+    }
+    res.json({ msg: 'música deletada com sucesso!' })
   })
 })
 
