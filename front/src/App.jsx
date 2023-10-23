@@ -9,6 +9,7 @@ import Genre from './routes/Genre'
 import Song from './routes/Song'
 import EditProfile from './routes/EditProfile'
 import Profile from './routes/Profile'
+import Search from './routes/Search'
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/song/:id" element={<Song />} />
           <Route path="/editProfile" element={<EditProfile />} />
           <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/search/:search" element={<Search />} />
         </Routes>
       </Router>
     </>

@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
+import { AiOutlineSearch } from 'react-icons/ai'
 
 import Header from '../components/Header'
 import '../styles/home.css'
@@ -12,6 +14,11 @@ const Home = () => {
 
   const [songs, setSongs] = useState([])
   const [genres, setGenres] = useState([])
+
+  const [search, setSearch] = useState()
+  const searchButtonStyle = {
+    color: '#fff0aa', height: 30, width: 30
+  }
 
   useEffect(() => {
     axios.get('http://localhost:3000/users/me').then((response) => {
@@ -29,7 +36,23 @@ const Home = () => {
     <div>
       <Header />
 
-      <div className="welcome">bem vindo de volta, {username}</div>
+      <div className="welcome">
+        bem vindo de volta, {username}
+
+        <div className="searchField">
+          <input
+            className="searchInput"
+            placeholder="O que você quer ouvir hoje?"
+            onChange={(e) => setSearch(e.target.value)}
+          />
+
+          <Link to={`/search/${search}`}>
+            <button className="searchButton">
+              <AiOutlineSearch style={searchButtonStyle} />
+            </button>
+          </Link>
+        </div>
+      </div>
 
       <div className="home">
         <div className="songs">
@@ -41,14 +64,14 @@ const Home = () => {
                     src={`http://localhost:3000/sources/${song.capa}`}
                     height={180} width={180}
                   />
-
                   <div className="songName">{song.nome}</div>
+
                   <Link to={`/profile/${song.idusuario}`} style={{ textDecoration: 'none' }}>
                     <div className="artistName">{song.usuario}</div>
                   </Link>
                 </Link>
               </div>
-            )
+            ) 
           })}
         </div>
 

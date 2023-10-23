@@ -5,36 +5,33 @@ import { Link, useParams } from 'react-router-dom'
 
 import Header from '../components/Header'
 
-const Genre = () => {
+const Search = () => {
 
-  const { id } = useParams()
+  const { search } = useParams()
 
-  const [name, setName] = useState()
-  const [songs, setSongs] = useState([])
   const [genres, setGenres] = useState([])
+  const [songs, setSongs] = useState([])
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/genres/${id}`).then((response) => {
-      setName(response.data[0].nome)
-    })
-    axios.get(`http://localhost:3000/genres/${id}/songs`).then((response) => {
-      setSongs(response.data)
-    })
     axios.get('http://localhost:3000/genres').then((response) => {
       setGenres(response.data)
     })
-  }, [id])
+    axios.get('http://localhost:3000/songs').then((response) => {
+      setSongs(response.data)
+    })
+  }, [])
 
   return (
     <div>
       <Header />
-
-      <div className="genreName">{name}</div>
-      <div className="genreDetails">{songs.length} músicas</div>
+    
+      <div className="resultMessage">exibindo resultados para "{search}":</div>
 
       <div className="home">
         <div className="columnSongList">
-          {songs.map((song) => {
+          {songs.filter((song) => {
+            return song.nome.toLowerCase().includes(search.toLowerCase())
+          }).map((song) => {
             return (
               <Link to={`/song/${song.id}`} style={{ textDecoration: 'none' }}>
                 <div className="genreColumnSong">
@@ -48,10 +45,10 @@ const Genre = () => {
                   </div>
                 </div>
               </Link>
-            )
-          })}
+            )})
+          }
         </div>
-
+        
         <div className="genreLinks">
           <div className="genres">:: gêneros ::</div>
 
@@ -73,4 +70,4 @@ const Genre = () => {
   )
 }
 
-export default Genre
+export default Search
