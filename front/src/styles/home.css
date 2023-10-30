@@ -49,7 +49,7 @@
 .genres {
   color: #fff0aa;
   text-align: left;
-  font-size: 35px;
+  font-size: 40px;
   margin-bottom: 20px;
   margin-left: 5px;
 }
@@ -60,11 +60,11 @@
   margin-right: 30px;
   width: 250px;
   padding: 8px;
-  height: 360px;
+  height: 666px;
 }
 
 .genreLink {
-  font-size: 18px;
+  font-size: 20px;
   text-align: left;
   margin-left: 5px;
 }
@@ -91,7 +91,8 @@
   padding: 8px;
   display: flex;
   width: 750px;
-  margin-bottom: 8px;
+  margin-top: 8px;
+  justify-content: space-between
 }
 
 .searchField {
@@ -99,7 +100,7 @@
 }
 
 .searchInput {
-  background-color: #300666;
+  background-color: #301566;
   margin-left: 25px;
   margin-bottom: 30px;
   width: 420px;
@@ -108,7 +109,6 @@
   padding-left: 10px;
   font-size: 25px;
   color: white;
-  margin-top: 10px;
 }
 
 .searchButton {
@@ -123,4 +123,35 @@
   color: white;
   font-size: 25px;
   margin-left: 25px;
+}
+
+.deleteCommentMessage {
+  color: white;
+  margin-left: 25px;
+  margin-bottom: 20px;
+}
+
+.addToPlaylistButton {
+  background-color: transparent;
+  border-width: 0px;
+}
+
+.choosePlaylistContainer {
+  margin-bottom: 10px;
+  padding: 8px;
+  color: white;
+  font-size: 15px;
+}
+
+.choosePlaylists {
+  display: flex;
+}
+
+.choosePlaylist {
+  color: #fff0aa;
+  margin-right: 10px;
+  background-color: #0f0916;
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }

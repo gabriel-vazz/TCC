@@ -66,7 +66,7 @@
   justify-content: space-between;
 }
 
-.comment {
+.commentContainer {
   margin-left: 25px;
   margin-top: 10px;
   background-color: #0f0916;
@@ -74,7 +74,7 @@
   word-wrap: break-word;
   width: 746px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
 }
 
 .username {

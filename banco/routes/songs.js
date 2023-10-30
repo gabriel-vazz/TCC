@@ -7,7 +7,7 @@ const path = require('path')
 const db = mysql.createPool({
   host: '127.0.0.1',
   user: 'root',
-  password: '',
+  password: 'gabriel200612',
   database: 'stuff',
   multipleStatements: true
 })
@@ -58,7 +58,8 @@ router.post('/', upload.fields([
 
 router.get('/', (req, res) => {
   const sql =
-    `SELECT musica.id, musica.idusuario, musica.nome, musica.musica, musica.capa, musica.descricao, 
+    `SELECT musica.id, musica.idusuario, musica.nome, 
+    musica.musica, musica.capa, musica.descricao, 
     usuario.nome AS usuario 
     FROM musica
     JOIN usuario ON musica.idusuario = usuario.id`
@@ -88,6 +89,40 @@ router.get('/:id', (req, res) => {
       res.sendStatus(500)
     }
     res.json(result)
+  })
+})
+
+router.post('/comments', (req, res) => {
+  const user = req.session.user[0].id
+  const { comment } = req.body
+  const { id } = req.body
+
+  const sql = 'INSERT INTO comentario(texto, idcomentou, idcomentado) VALUES (?,?,?)'
+
+  if (!comment) {
+    res.json({ msg: 'por favor, escreva seu comentário' })
+  } else {
+    db.query(sql, [comment, user, id], (err, result) => {
+      if (err) {
+        console.log(err)
+        res.json({ msg: 'erro ao postar comentário' })
+      }
+      res.json({ msg: 'comentário postado com sucesso!' })
+    })
+  }
+})
+
+router.delete('/comments/:id', (req, res) => {
+  const id = req.params.id
+
+  const sql = 'DELETE FROM comentario WHERE id = ?'
+
+  db.query(sql, id, (err, result) => {
+    if(err) {
+      console.log(err)
+      res.json({ msg: 'erro ao deletar comentário '})
+    }
+    res.json({ msg: 'comentário deletado com sucesso!' })
   })
 })
 
@@ -184,31 +219,11 @@ router.get('/:id/likes', (req, res) => {
   })
 })
 
-router.post('/comments', (req, res) => {
-  const user = req.session.user[0].id
-  const { comment } = req.body
-  const { id } = req.body
-
-  const sql = 'INSERT INTO comentario(texto, idcomentou, idcomentado) VALUES (?,?,?)'
-
-  if (!comment) {
-    res.json({ msg: 'por favor, escreva seu comentário' })
-  } else {
-    db.query(sql, [comment, user, id], (err, result) => {
-      if (err) {
-        console.log(err)
-        res.json({ msg: 'erro ao postar comentário' })
-      }
-      res.json({ msg: 'comentário postado com sucesso!' })
-    })
-  }
-})
-
 router.get('/:id/comments', (req, res) => {
   const id = req.params.id
 
   const sql =
-    `SELECT comentario.texto, comentario.idcomentou, usuario.nome 
+    `SELECT comentario.id, comentario.texto, comentario.idcomentou, usuario.nome 
     FROM comentario
     JOIN usuario ON comentario.idcomentou = usuario.id
     WHERE comentario.idcomentado = ?`

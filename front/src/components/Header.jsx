@@ -29,7 +29,7 @@ const Header = () => {
     <div className="headerContainer">
       <div className="header">
         <Link to='http://localhost:5173/'>
-          <img src={logo} height="125" />
+          <img src={logo} height="140" />
         </Link>
 
         <div className="links">

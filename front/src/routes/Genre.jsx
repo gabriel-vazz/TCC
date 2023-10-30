@@ -3,6 +3,9 @@ import axios from 'axios'
 
 import { Link, useParams } from 'react-router-dom'
 
+import { PiListPlusFill } from 'react-icons/pi'
+
+import AddSongToPlaylist from '../components/AddSongToPlaylist'
 import Header from '../components/Header'
 
 const Genre = () => {
@@ -12,6 +15,13 @@ const Genre = () => {
   const [name, setName] = useState()
   const [songs, setSongs] = useState([])
   const [genres, setGenres] = useState([])
+
+  const addToPlaylistButtonStyle = {
+    color: '#fff0aa',
+    height: 40, width: 40
+  }
+
+  const [addId, setAddId] = useState()
 
   useEffect(() => {
     axios.get(`http://localhost:3000/genres/${id}`).then((response) => {
@@ -36,20 +46,37 @@ const Genre = () => {
         <div className="columnSongList">
           {songs.map((song) => {
             return (
-              <Link to={`/song/${song.id}`} style={{ textDecoration: 'none' }}>
+              <div>
                 <div className="genreColumnSong">
-                  <img
-                    src={`http://localhost:3000/sources/${song.capa}`}
-                    height={60} width={60}
-                  />
+                  <Link to={`/song/${song.id}`} style={{ textDecoration: 'none' }}>
+                    <div className="columnSongInfo">
+                      <img
+                        src={`http://localhost:3000/sources/${song.capa}`}
+                        height={60} width={60}
+                      />
 
-                  <div className="columnSongName">
-                    {song.usuario} - {song.nome}
-                  </div>
+                      <div className="columnSongName">
+                        {song.usuario} - {song.nome}
+                      </div>
+                    </div>
+                  </Link>
+
+                  <button 
+                    className="addToPlaylistButton"
+                    onClick={() => setAddId(song.id)}
+                  >
+                    <PiListPlusFill style={addToPlaylistButtonStyle} />
+                  </button>
                 </div>
-              </Link>
-            )
-          })}
+
+                <AddSongToPlaylist 
+                  songId={song.id} 
+                  addId={addId}
+                  songName={song.nome}
+                  artistName={song.usuario}
+                />
+              </div> 
+            )})}
         </div>
 
         <div className="genreLinks">

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-const DeleteMessage = ({ songId, deleteId }) => {
+const DeleteSong = ({ songId, deleteId }) => {
   
   const [message, setMessage] = useState()
   
@@ -31,4 +31,4 @@ const DeleteMessage = ({ songId, deleteId }) => {
   }
 }
 
-export default DeleteMessage
+export default DeleteSong

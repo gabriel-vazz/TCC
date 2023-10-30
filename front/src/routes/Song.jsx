@@ -9,6 +9,9 @@ import '../styles/song.css'
 
 import Header from '../components/Header'
 import Like from '../components/Like'
+import DeleteComment from '../components/DeleteComment'
+
+import { BsFillTrashFill } from 'react-icons/bs'
 
 const Song = () => {
 
@@ -21,7 +24,17 @@ const Song = () => {
   const [description, setDescription] = useState()
 
   const [comment, setComment] = useState()
-  const [message, setMessage] = useState()
+  const [commentMessage, setCommentMessage] = useState()
+  
+  const [deleteCommentId, setDeleteCommentId] = useState([])
+  const [deleteCommentMessage, setDeleteCommentMessage] = useState()
+  const deleteCommentIconStyle = {
+    color: '#ff6969', 
+    height: 40, width: 40, 
+    marginTop: 5
+  }
+
+  const [userId, setUserId] = useState()
 
   const handlePlayButton = async () => {
     await axios.post('http://localhost:3000/users/songs/current', { id: id })
@@ -29,11 +42,21 @@ const Song = () => {
 
   const postComment = async () => {
     await axios.post('http://localhost:3000/songs/comments', {
-      comment: comment,
+      comment: comment, 
       id: id
     }).then((response) => {
       if (response.data.msg) {
-        setMessage(response.data.msg)
+        setCommentMessage(response.data.msg)
+      }
+    })
+  }
+
+  const handleDeleteComment = async(comment) => { 
+    setDeleteCommentId([...deleteCommentId, comment.id])
+    await axios.delete(`http://localhost:3000/songs/comments/${comment.id}`)
+    .then((response) => {
+      if (response.data.msg) {
+        setDeleteCommentMessage(response.data.msg)
       }
     })
   }
@@ -47,6 +70,9 @@ const Song = () => {
     })
     axios.get(`http://localhost:3000/songs/${id}/comments`).then((response) => {
       setComments(response.data)
+    })
+    axios.get('http://localhost:3000/users/me').then((response) => {
+      setUserId(response.data[0].id)
     })
     axios.get(`http://localhost:3000/songs/${id}`).then((response) => {
       setSongData(response.data)
@@ -117,21 +143,62 @@ const Song = () => {
           COMENTAR
         </button>
 
-        <div className="commentMessage">{message}</div>
+        <div className="commentMessage">{commentMessage}</div>
       </div>
 
       <div className="commentsContainer">
         <div>
           {comments.map((comment) => {
-            return (
-              <div className="comment">
-                <Link to={`/profile/${comment.idcomentou}`} style={{ textDecoration: 'none' }}>
-                  <div className="username">{comment.nome}</div>
-                </Link>
+            if(comment.idcomentou == userId) {
+              return (
+                <div className="comment">
+                  <div className="commentContainer">
+                    <div className="commentInfo">
+                      <Link 
+                        to={`/profile/${comment.idcomentou}`} 
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <div className="username">{comment.nome}</div>
+                      </Link>
+                      <div className="commentText">{comment.texto}</div>
+                    </div>
 
-                <div className="commentText">{comment.texto}</div>
-              </div>
-            )
+                    <div 
+                      className="deleteComment"
+                      onClick={() => handleDeleteComment(comment)}
+                    >
+                      <BsFillTrashFill style={deleteCommentIconStyle} />  
+                    </div>
+                  </div>
+
+                  <DeleteComment 
+                    commentId={comment.id} 
+                    deleteId={deleteCommentId} 
+                    message={deleteCommentMessage}
+                  />
+                </div>
+              )
+            }
+          })}
+
+          {comments.map((comment) => {
+            if(comment.idcomentou != userId) {
+              return (
+                <div className="comment">
+                  <div className="commentContainer">
+                    <div className="commentInfo">
+                      <Link 
+                        to={`/profile/${comment.idcomentou}`} 
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <div className="username">{comment.nome}</div>
+                      </Link>
+                      <div className="commentText">{comment.texto}</div>
+                    </div>
+                  </div>
+                </div>
+              )
+            }
           })}
         </div>
 

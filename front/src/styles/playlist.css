@@ -1,0 +1,102 @@
+.newPlaylist {
+  color: #fff0aa;
+  margin-left: 25px;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.newPlaylistText {
+  color: white;
+  margin-left: 25px;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.newPlaylistInput {
+  background-color: #301566;
+  margin-left: 25px;
+  margin-bottom: 20px;
+  width: 600px;
+  height: 50px;
+  border-width: 0px;
+  padding-left: 10px;
+  font-size: 25px;
+  color: white;
+}
+
+.createPlaylistButton {
+  background-color: #4b0000;
+  color: #fff0aa;
+  border-radius: 5px;
+  border-width: 0px;
+  height: 50px;
+  width: 180px;
+  font-size: 20px;
+  font-style: italic;
+  margin-left: 25px;
+}
+
+.playlistDescriptionInput {
+  background-color: #301566;
+  color: white;
+  font-size: 15px;
+  border-width: 0px;
+  padding: 10px;
+  margin-left: 25px;
+  margin-bottom: 20px;
+  width: 590px;
+  height: 100px;
+}
+
+.createPlaylistMessage {
+  font-size: 20px;
+  color: #cccccc;
+  margin-left: 25px;
+  margin-top: 10px;
+}
+
+.addToPlaylistButton {
+  background-color: transparent;
+  border-width: 0px;
+}
+
+.choosePlaylistContainer {
+  margin-bottom: 10px;
+  padding: 8px;
+  color: white;
+  font-size: 15px;
+}
+
+.choosePlaylists {
+  display: flex;
+}
+
+.choosePlaylist {
+  color: #fff0aa;
+  margin-right: 10px;
+  background-color: #0f0916;
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.playlistDescription {
+  color: white;
+  margin-left: 25px;
+  margin-bottom: 40px;
+  font-size: 25px;
+}
+
+.playlistName {
+  color: #fff0aa;
+  margin-left: 25px;
+  font-size: 55px;
+  margin-top: -20px;
+}
+
+.playlistDetails {
+  color: #b6b6b6;
+  margin-left: 25px;
+  font-size: 22px;
+  margin-bottom: 15px;
+}

@@ -17,8 +17,11 @@ const Home = () => {
 
   const [search, setSearch] = useState()
   const searchButtonStyle = {
-    color: '#fff0aa', height: 30, width: 30
+    color: '#fff0aa', 
+    height: 30, width: 30
   }
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios.get('http://localhost:3000/users/me').then((response) => {
@@ -46,11 +49,12 @@ const Home = () => {
             onChange={(e) => setSearch(e.target.value)}
           />
 
-          <Link to={`/search/${search}`}>
-            <button className="searchButton">
-              <AiOutlineSearch style={searchButtonStyle} />
-            </button>
-          </Link>
+          <button
+            onClick={() => {if(search) {navigate(`/search/${search}`)}}}
+            className="searchButton"
+          >
+            <AiOutlineSearch style={searchButtonStyle} />
+          </button>
         </div>
       </div>
 

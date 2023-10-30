@@ -8,9 +8,9 @@ import { BsFillTrashFill } from 'react-icons/bs'
 
 import Flag from '../components/Flag'
 import Header from '../components/Header'
-import DeleteMessage from '../components/DeleteMessage'
 
 import '../styles/userprofile.css'
+import DeleteSong from '../components/DeleteSong'
 
 const UserProfile = () => {
 
@@ -20,15 +20,19 @@ const UserProfile = () => {
 
   const [songs, setSongs] = useState([])
   const [followers, setFollowers] = useState([])
+  const [playlists, setPlaylists] = useState([])
 
   const [friends, setFriends] = useState([])
 
   const [noSongMessage, setNoSongMessage] = useState()
   const [noFriendsMessage, setNoFriendsMessage] = useState()
+  const [noPlaylistsMessage, setNoPlaylistsMessage] = useState()
   
   const [deleteSongId, setDeleteSongId] = useState()
   const deleteSongIconStyle = {
-    color: '#ff6969', height: 40, width: 40, marginTop: 5
+    color: '#ff6969', 
+    height: 40, width: 40, 
+    marginTop: 5
   }
 
   useEffect(() => {
@@ -55,6 +59,14 @@ const UserProfile = () => {
         setNoFriendsMessage(response.data.msg)
       } else {
         setFriends(response.data)
+      }
+    })
+
+    axios.get('http://localhost:3000/users/me/playlists').then((response) => {
+      if(response.data.msg) {
+        setNoPlaylistsMessage(response.data.msg)
+      } else {
+        setPlaylists(response.data)
       }
     })
   }, [])
@@ -113,7 +125,7 @@ const UserProfile = () => {
                     </button>
                   </div>
 
-                  <DeleteMessage songId={song.id} deleteId={deleteSongId} />
+                  <DeleteSong songId={song.id} deleteId={deleteSongId} />
                 </div>
               )
             })}
@@ -124,6 +136,31 @@ const UserProfile = () => {
           <Link to='/post'>
             <button className="loginButton">
               POSTAR MÚSICA
+            </button>
+          </Link>
+
+          <div className="profileSongs">:: suas playlists ::</div>
+
+          <div className="playlistsContainer">
+            {playlists.map((playlist) => {
+              return (
+                <Link 
+                  to={`/playlist/${playlist.id}`} 
+                  style={{ textDecoration: 'none' }}
+                >
+                  <div className="playlist">
+                    {playlist.nome}
+                  </div>
+                </Link> 
+              )
+            })}
+          </div>
+
+          <div className="noPlaylistsMessage">{noPlaylistsMessage}</div>
+
+          <Link to='/playlist/new'>
+            <button className="loginButton">
+              CRIAR PLAYLIST
             </button>
           </Link>
         </div>

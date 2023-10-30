@@ -10,6 +10,8 @@ import Song from './routes/Song'
 import EditProfile from './routes/EditProfile'
 import Profile from './routes/Profile'
 import Search from './routes/Search'
+import NewPlaylist from './routes/NewPlaylist'
+import Playlist from './routes/Playlist'
 
 const App = () => {
   return (
@@ -26,6 +28,8 @@ const App = () => {
           <Route path="/editProfile" element={<EditProfile />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/search/:search" element={<Search />} />
+          <Route path="/playlist/new" element={<NewPlaylist />} />
+          <Route path="/playlist/:id" element={<Playlist />} />
         </Routes>
       </Router>
     </>

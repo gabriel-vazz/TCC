@@ -13,11 +13,12 @@ const session = require('express-session')
 const songsRouter = require('./routes/songs')
 const genresRouter = require('./routes/genres')
 const usersRouter = require('./routes/users')
+const playlistsRouter = require('./routes/playlists')
 
 const db = mysql.createPool({
   host: '127.0.0.1',
   user: 'root',
-  password: '',
+  password: 'gabriel200612',
   database: 'stuff',
   multipleStatements: true
 })
@@ -44,6 +45,7 @@ app.use(express.json())
 app.use('/songs', songsRouter)
 app.use('/genres', genresRouter)
 app.use('/users', usersRouter)
+app.use('/playlists', playlistsRouter)
 
 const PORT = 3000
 

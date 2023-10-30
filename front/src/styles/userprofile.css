@@ -95,3 +95,17 @@
   border-width: 0px;
   font-size: 18px;
 }
+
+.noPlaylistsMessage {
+  color: gray;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.playlist {
+  background-color: #0f0916;
+  color: white;
+  padding: 8px;
+  margin-top: 5px;
+  font-size: 25px;
+}
