@@ -42,7 +42,7 @@
 
 .profileName {
   color: #fff0aa;
-  font-size: 50px;
+  font-size: 55px;
   margin-top: -18px;
   padding-right: 20px;
   display: flex;
@@ -50,15 +50,15 @@
 
 .profileDescription {
   color: white;
-  font-size: 25px;
+  font-size: 20px;
   word-wrap: break-word;
   white-space: pre-wrap;
-  width: 600px;
+  width: 525px;
 }
 
 .profileDetails {
   color: white;
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 30px;
 }
 

@@ -55,7 +55,7 @@ const AddSongToPlaylist = ({
             })}
           </div>
 
-          <div className="message">{responseMessage}</div>
+          <div className="playlistMessage">{responseMessage}</div>
         </div>
       )
     } else {

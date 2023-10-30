@@ -42,15 +42,23 @@ const EditProfile = () => {
     <div>
       <Header />
 
-      <div className="editProfile">:: editar perfil ::</div>
+      <div className="editProfile">
+        :: editar perfil ::
+        <button className="saveChangesButton" onClick={() => saveChanges()}>
+          SALVAR
+        </button>
+      </div>
+      <div className="saveMessage">{message}</div>
 
       <div className="editProfileContainer">
+        <div className="newPlaylistText">nome:</div>
         <input
           onChange={(e) => setName(e.target.value)}
           className="editProfileInput"
           value={name}
         /><br />
 
+        <div className="newPlaylistText">descrição:</div>
         <textarea
           rows="4" cols="73"
           onChange={(e) => setDescription(e.target.value)}
@@ -59,6 +67,7 @@ const EditProfile = () => {
           value={description}
         /><br />
 
+        <div className="newPlaylistText">país:</div>
         <div>
           <select
             onChange={(e) => setCountry(e.target.value.toLowerCase())}
@@ -76,12 +85,6 @@ const EditProfile = () => {
           </div>
         </div>
       </div>
-
-      <button className="saveChangesButton" onClick={() => saveChanges()}>
-        SALVAR
-      </button>
-
-      <div className="saveMessage">{message}</div>
     </div>
   )
 }

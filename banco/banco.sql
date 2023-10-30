@@ -173,7 +173,7 @@ CREATE TABLE `musica_playlist` (
   KEY `idmusicas_idx` (`idmusicas`),
   CONSTRAINT `idmusicas` FOREIGN KEY (`idmusicas`) REFERENCES `musica` (`id`),
   CONSTRAINT `idplaylist` FOREIGN KEY (`idplaylist`) REFERENCES `playlist` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,7 +200,7 @@ CREATE TABLE `playlist` (
   PRIMARY KEY (`id`),
   KEY `idcriou_idx` (`idcriou`),
   CONSTRAINT `idcriou` FOREIGN KEY (`idcriou`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

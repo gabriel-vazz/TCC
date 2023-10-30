@@ -88,14 +88,26 @@ const UserProfile = () => {
               <div className="profileDescription">{description}</div>
             </div>
 
-            <div className="flag">
-              <Flag code={country} />
-            </div>
-          </div>
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              textAlign: 'right',
+              justifyContent: 'space-between'
+            }}>
+              <div className="flag">
+                <Flag code={country} />
+              </div>
 
-          <Link to='/editProfile'>
-            <button className="editProfileButton">EDITAR PERFIL</button>
-          </Link>
+              <Link 
+                style={{ textDecoration: 'none', color: '#fff0aa' }}
+                to='/profile/me/edit'
+              >
+                <div style={{ fontSize: 18 }}>EDITAR PERFIL</div>
+              </Link>
+            </div>
+
+            
+          </div>
 
           <div className="profileSongs">:: suas músicas ::</div>
 

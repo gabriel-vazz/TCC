@@ -6,7 +6,7 @@ const mysql = require('mysql2')
 const db = mysql.createPool({
   host: '127.0.0.1',
   user: 'root',
-  password: 'gabriel200612',
+  password: '',
   database: 'stuff',
   multipleStatements: true
 })
@@ -81,7 +81,8 @@ router.get('/:id/songs', (req, res) => {
       perfil.nome AS usuario,
       musica.nome AS musica, 
       usuario.nome AS artista,
-      musica.capa
+      musica.musica AS mp3, 
+      musica.capa, musica.id AS idmusica
     FROM musica_playlist
   
     JOIN playlist ON playlist.id = musica_playlist.idplaylist

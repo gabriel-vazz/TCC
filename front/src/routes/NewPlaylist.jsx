@@ -27,7 +27,7 @@ const NewPlaylist = () => {
     <div>
       <Header />
 
-      <div className="newPlaylist">:: nova playlist ::</div>
+      <div className="newPlaylist">:: criar playlist ::</div>
 
       <div className="newPlaylistText">nome:</div>
       <input 

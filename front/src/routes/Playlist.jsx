@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 
 import { useParams, Link } from 'react-router-dom'
 
+import PlayPauseButton from '../components/PlayPauseButton'
 import Header from '../components/Header'
 
 const Playlist = () => {
@@ -45,7 +46,7 @@ const Playlist = () => {
           return (
             <div>
               <div className="genreColumnSong">
-                <Link to={`/song/${song.idmusicas}`} style={{ textDecoration: 'none' }}>
+                <Link to={`/song/${song.idmusica}`} style={{ textDecoration: 'none' }}>
                   <div className="columnSongInfo">
                     <img
                       src={`http://localhost:3000/sources/${song.capa}`}

@@ -1,8 +1,10 @@
 .editProfile {
   color: #fff0aa;
   margin-left: 25px;
-  font-size: 30px;
-  margin-bottom: 20px;
+  font-size: 40px;
+  display: flex;
+  justify-content: space-between;
+  width: 615px;
 }
 
 .editProfileInput {
@@ -14,7 +16,7 @@
   border-width: 0px;
   height: 45px;
   width: 603px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 .editDescriptionInput {
@@ -24,7 +26,7 @@
   border-width: 0px;
   padding: 8px;
   margin-left: 25px;
-  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .countrySelect {
@@ -35,7 +37,7 @@
   border-width: 0px;
   padding-left: 10px;
   font-size: 20px;
-  margin-top: 8px;
+  width: 200px;
 }
 
 .saveChangesButton {
@@ -46,20 +48,19 @@
   height: 50px;
   width: 180px;
   font-size: 20px;
-  margin-bottom: 10px;
   font-style: italic;
-  margin-left: 25px;
-  margin-top: 25px;
+  margin-top: 5px;
 }
 
 .editFlag {
-  margin-left: 525px;
-  margin-top: -46px;
+  margin-left: 250px;
   display: flex;
+  margin-top: -46px;
 }
 
 .saveMessage {
   color: #cccccc;
   font-size: 20px;
   margin-left: 25px;
+  margin-bottom: 25px;
 }
