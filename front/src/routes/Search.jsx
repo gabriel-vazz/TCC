@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 
 import { PiListPlusFill } from 'react-icons/pi'
 import { GiStonedSkull } from 'react-icons/gi'
+import { AiOutlineSearch } from 'react-icons/ai'
+import { FaMusic } from 'react-icons/fa'
 
 import AddSongToPlaylist from '../components/AddSongToPlaylist'
 import Header from '../components/Header'
@@ -19,13 +21,27 @@ const Search = () => {
   const [songs, setSongs] = useState([])
   const [users, setUsers] = useState([])
 
+  const [friends, setFriends] = useState([])
+  const [noFriendsMessage, setNoFriendsMessage] = useState()
+
+  const [addId, setAddId] = useState()
   const addToPlaylistButtonStyle = {
     color: '#fff0aa',
     height: 40, width: 40
   }
 
-  const [addId, setAddId] = useState()
+  const [userSearch, setUserSearch] = useState()
+  const [songSearch, setSongSearch] = useState()
+  const userSearchButtonStyle = {
+    color: '#fff0aa', 
+    height: 20, width: 20
+  }
+  const songSearchButtonStyle = {
+    color: '#fff0aa', 
+    height: 30, width: 30
+  }
 
+  const navigate = useNavigate()
   useEffect(() => {
     axios.get('http://localhost:3000/genres').then((response) => {
       setGenres(response.data)
@@ -36,17 +52,48 @@ const Search = () => {
     axios.get('http://localhost:3000/users').then((response) => {
       setUsers(response.data)
     })
+    axios.get('http://localhost:3000/users/me/friends').then((response) => {
+      if(response.data.msg) {
+        setNoFriendsMessage(response.data.msg)
+      } else {
+        setFriends(response.data)
+      }
+    })
   }, [])
 
   if(category == 'songs') {
     return (
       <div>
         <Header />
-      
-        <div className="resultMessage">exibindo resultados para "{search}":</div>
-  
+
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div>a</div>
+          <div className="searchField" style={{textAlign: 'right'}}>
+            
+            <input
+              className="searchInput"
+              placeholder="o que você quer ouvir hoje?"
+              onChange={(e) => setSongSearch(e.target.value)}
+            />
+            <br/><br/><br/><br/><br/><br/>
+            <button
+              onClick={() => {if(songSearch) {navigate(`/search/songs/${songSearch}`)}}}
+              className="searchButton"
+            >
+              <AiOutlineSearch style={songSearchButtonStyle} />
+            </button>
+          </div>
+        </div>
+        
         <div className="home">
-          <div className="columnSongList">
+          <div className="columnSongList" style={{marginTop: -40}}>
+          <div 
+            className="resultMessage"
+            style={{marginLeft: 0, marginTop: -80, marginBottom: 75}}
+          >
+            exibindo resultados para "{search}":
+          </div>
+
             {songs.filter((song) => {
               return song.nome.toLowerCase().includes(search.toLowerCase())
             }).map((song) => {
@@ -90,10 +137,9 @@ const Search = () => {
               )})
             }     
           </div>
-
+          
           <div className="genreLinks">
             <div className="genres">:: gêneros ::</div>
-
             {genres.map((genre) => {
               return (
                 <div className="genreLink">
@@ -116,7 +162,12 @@ const Search = () => {
       <div>
         <Header />
 
-        <div className="resultMessage">exibindo resultados para "{search}":</div>
+        <div 
+          className="resultMessage"
+          style={{marginBottom: 30}}
+        >
+          exibindo resultados para "{search}":
+        </div>
 
         <div className="home">
           <div>
@@ -137,6 +188,69 @@ const Search = () => {
                 </div> 
               )})
             }
+          </div>
+
+          <div className="friends">
+            <div style={{marginTop: -60, marginRight: 30}}>
+              :: seguido por você ::<br/>
+            
+              <div className="searchUserContainer">
+                <input
+                  className="searchUserInput"
+                  placeholder="procurar perfil"
+                  onChange={(e) => setUserSearch(e.target.value)}
+                />
+
+                <button 
+                  className="searchUserButton"
+                  onClick={() => {if(userSearch) {navigate(`/search/users/${userSearch}`)}}}
+                >
+                  <AiOutlineSearch style={userSearchButtonStyle} />
+                </button>
+              </div>
+              
+              <div className="friendList">
+                {friends.map((friend) => {
+                  if (friend.id_musica != null) {
+                    return (
+                      <div>
+                        <div className="friend">
+                          <Link
+                            to={`/profile/${friend.id_usuario}`}
+                            style={{ textDecoration: 'none', color: '#fff0aa' }}
+                          >
+                            {friend.nome_usuario}
+                          </Link>
+
+                          <div className="friendSong">
+                            <Link
+                              to={`/song/${friend.id_musica}`}
+                              style={{ textDecoration: 'none', color: 'white' }}
+                            >
+                              <FaMusic style={{ marginRight: 6 }} /> 
+                              {friend.nome_artista} - {friend.nome_musica} 
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  } else {
+                    return (
+                      <div className="friend">
+                        <Link
+                          to={`/profile/${friend.id_usuario}`}
+                          style={{ textDecoration: 'none', color: '#fff0aa' }}
+                        >
+                          {friend.nome_usuario}
+                        </Link>
+                      </div>
+                    )
+                  }
+                })}
+              </div>
+
+              <div className="noFriendsMessage">{noFriendsMessage}</div>
+            </div>
           </div>
         </div>
       </div>
