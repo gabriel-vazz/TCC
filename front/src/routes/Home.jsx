@@ -4,8 +4,11 @@ import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { AiOutlineSearch } from 'react-icons/ai'
+import { GiStonedSkull } from 'react-icons/gi'
 
 import Header from '../components/Header'
+import Like from '../components/Like'
+
 import '../styles/home.css'
 
 const Home = () => {
@@ -50,7 +53,7 @@ const Home = () => {
           />
 
           <button
-            onClick={() => {if(search) {navigate(`/search/${search}`)}}}
+            onClick={() => {if(search) {navigate(`/search/songs/${search}`)}}}
             className="searchButton"
           >
             <AiOutlineSearch style={searchButtonStyle} />
@@ -63,18 +66,29 @@ const Home = () => {
           {songs.map((song) => {
             return (
               <div className="song">
-                <Link to={`/song/${song.id}`} style={{ textDecoration: 'none' }}>
-                  <img
-                    src={`http://localhost:3000/sources/${song.capa}`}
-                    height={180} width={180}
-                  />
-                  <div className="songName">{song.nome}</div>
-
-                  <Link to={`/profile/${song.idusuario}`} style={{ textDecoration: 'none' }}>
-                    <div className="artistName">{song.usuario}</div>
+                <div>
+                  <Link to={`/song/${song.id}`} style={{ textDecoration: 'none' }}>
+                    <img
+                      src={`http://localhost:3000/sources/${song.capa}`}
+                      height={180} width={180}
+                    />
                   </Link>
-                </Link>
-              </div>
+                  <div style={{display:'flex', justifyContent: 'space-between'}}>
+                    <div>
+                      <Link to={`/song/${song.id}`} style={{ textDecoration: 'none' }}>
+                        <div className="songName">{song.nome}</div>
+                      </Link>
+                      <Link to={`/profile/${song.idusuario}`} style={{ textDecoration: 'none' }}>
+                        <div className="artistName">{song.usuario}</div>
+                      </Link>
+                    </div>
+                      
+                    <div className="smallLike">
+                      <Like id={song.id} size={30} />
+                    </div>
+                  </div>
+                </div>
+              </div> 
             ) 
           })}
         </div>
@@ -89,7 +103,7 @@ const Home = () => {
                   to={`/genre/${genre.id}`} 
                   style={{ textDecoration: 'none', color: 'white' }}
                 >
-                  {genre.nome}
+                  <GiStonedSkull /> {genre.nome}
                 </Link>
               </div>
             )

@@ -6,7 +6,7 @@ const mysql = require('mysql2')
 const db = mysql.createPool({
   host: '127.0.0.1',
   user: 'root',
-  password: '',
+  password: 'gabriel200612',
   database: 'stuff',
   multipleStatements: true
 })
@@ -231,6 +231,16 @@ router.get('/me/playlists', (req, res) => {
     } else {
       res.json(result)
     }
+  })
+})
+
+router.get('/', (req, res) => {
+  db.query('SELECT * FROM usuario', (err, result) => {
+    if(err) {
+      console.log(err)
+      res.sendStatus(500)
+    }
+    res.json(result)
   })
 })
 

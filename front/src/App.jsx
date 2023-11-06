@@ -27,7 +27,7 @@ const App = () => {
           <Route path="/song/:id" element={<Song />} />
           <Route path="/profile/me/edit" element={<EditProfile />} />
           <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/search/:search" element={<Search />} />
+          <Route path="/search/:category/:search" element={<Search />} />
           <Route path="/playlist/new" element={<NewPlaylist />} />
           <Route path="/playlist/:id" element={<Playlist />} />
         </Routes>

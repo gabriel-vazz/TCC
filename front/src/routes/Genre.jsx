@@ -4,9 +4,11 @@ import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 
 import { PiListPlusFill } from 'react-icons/pi'
+import { GiStonedSkull } from 'react-icons/gi'
 
 import AddSongToPlaylist from '../components/AddSongToPlaylist'
 import Header from '../components/Header'
+import Like from '../components/Like'
 
 const Genre = () => {
 
@@ -61,12 +63,17 @@ const Genre = () => {
                     </div>
                   </Link>
 
-                  <button 
-                    className="addToPlaylistButton"
-                    onClick={() => setAddId(song.id)}
-                  >
-                    <PiListPlusFill style={addToPlaylistButtonStyle} />
-                  </button>
+                  <div style={{ display:'flex' }}>
+                    <div className="mediumLike">
+                      <Like id={song.id} size={45} />
+                    </div>
+                    <button 
+                      className="addToPlaylistButton"
+                      onClick={() => setAddId(song.id)}
+                    >
+                      <PiListPlusFill style={addToPlaylistButtonStyle} />
+                    </button>
+                  </div>
                 </div>
 
                 <AddSongToPlaylist 
@@ -89,7 +96,7 @@ const Genre = () => {
                   to={`/genre/${genre.id}`}
                   style={{ textDecoration: 'none', color: 'white' }}
                 >
-                  {genre.nome}
+                  <GiStonedSkull /> {genre.nome}
                 </Link>
               </div>
             )

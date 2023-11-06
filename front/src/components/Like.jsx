@@ -3,14 +3,14 @@ import axios from 'axios'
 
 import { BiSolidHeartCircle, BiHeartCircle } from 'react-icons/bi'
 
-const Like = ({ id }) => {
+const Like = ({ id, size }) => {
 
   const [likeIcon, setLikeIcon] = useState()
   const [isLiked, setIsLiked] = useState()
   const likeIconStyle = {
     color: '#ff6969',
-    height: 69,
-    width: 69,
+    height: size,
+    width: size,
     marginTop: 15
   }
 

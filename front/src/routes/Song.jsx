@@ -113,7 +113,7 @@ const Song = () => {
                   </Link>
                 </div>
 
-                <Like id={id} />
+                <Like id={id} size={69} />
               </div>
 
               <AudioPlayer

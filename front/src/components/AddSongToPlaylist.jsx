@@ -65,7 +65,7 @@ const AddSongToPlaylist = ({
           <Link 
             to='/playlist/new' 
             style={{ 
-              color: '#fff0aa', 
+              color: 'white', 
               textDecoration: 'none',
               marginLeft: 8
             }}

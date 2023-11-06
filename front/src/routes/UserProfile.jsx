@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { FaMusic } from 'react-icons/fa'
 import { BsFillTrashFill } from 'react-icons/bs'
+import { AiOutlineSearch } from 'react-icons/ai'
 
 import Flag from '../components/Flag'
 import Header from '../components/Header'
@@ -34,6 +35,14 @@ const UserProfile = () => {
     height: 40, width: 40, 
     marginTop: 5
   }
+
+  const [search, setSearch] = useState()
+  const searchButtonStyle = {
+    color: '#fff0aa', 
+    height: 20, width: 20
+  }
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios.get('http://localhost:3000/users/me').then((response) => {
@@ -178,7 +187,23 @@ const UserProfile = () => {
         </div>
 
         <div className="friends">
-          :: seguido por você ::
+          :: seguido por você ::<br/>
+
+          <div className="searchUserContainer">
+            <input
+              className="searchUserInput"
+              placeholder="procurar perfil"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+
+            <button 
+              className="searchUserButton"
+              onClick={() => {if(search) {navigate(`/search/users/${search}`)}}}
+            >
+              <AiOutlineSearch style={searchButtonStyle} />
+            </button>
+          </div>
+
           <div className="friendList">
             {friends.map((friend) => {
               if (friend.id_musica != null) {
