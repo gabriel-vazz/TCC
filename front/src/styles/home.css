@@ -161,12 +161,19 @@
   background-color: #0f0916;
   color: #fff0aa;
   margin-top: 8px;
-  height: 75px;
   padding-left: 15px;
   padding-top: 8px;
+  padding-bottom: 25px;
   font-size: 30px;
   margin-left: 25px;
   width: 666px;
+}
+
+.columnUserDescription {
+  font-size: 15px;
+  color: white;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 .smallLike {

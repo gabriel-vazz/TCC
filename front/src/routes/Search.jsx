@@ -129,28 +129,14 @@ const Search = () => {
                     style={{ textDecoration: 'none', color: '#fff0aa'}}
                     to={`/profile/${user.id}`}
                   >
-                    {user.nome} 
+                    {user.nome}
+                    <div className="columnUserDescription">
+                      {user.descricao}
+                    </div>
                   </Link>
                 </div> 
               )})
             }
-          </div>
-
-          <div className="genreLinks">
-            <div className="genres">:: gêneros ::</div>
-
-            {genres.map((genre) => {
-              return (
-                <div className="genreLink">
-                  <Link
-                    to={`/genre/${genre.id}`}
-                    style={{ textDecoration: 'none', color: 'white' }}
-                  >
-                    {genre.nome}
-                  </Link>
-                </div>
-              )
-            })}
           </div>
         </div>
       </div>

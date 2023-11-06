@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 import Flag from '../components/Flag'
 import Header from '../components/Header'
-
-import UserProfile from './UserProfile'
 
 import '../styles/profile.css'
 
@@ -17,8 +15,6 @@ const Profile = () => {
   const [profileData, setProfileData] = useState([])
   const [songs, setSongs] = useState([])
   const [followers, setFollowers] = useState([])
-
-  const [friends, setFriends] = useState([])
 
   const [followButtonText, setFollowButtonText] = useState()
   const [isFollowed, setIsFollowed] = useState()
@@ -43,6 +39,8 @@ const Profile = () => {
       }
     })
   }
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios.get('http://localhost:3000/users/me').then((response) => {
@@ -73,7 +71,7 @@ const Profile = () => {
   }, [])
 
   if (userId == id) {
-    return <UserProfile />
+    navigate('/profile/me')
   } else {
     return (
       <div>

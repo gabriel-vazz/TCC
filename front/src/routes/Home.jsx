@@ -48,7 +48,7 @@ const Home = () => {
         <div className="searchField">
           <input
             className="searchInput"
-            placeholder="O que você quer ouvir hoje?"
+            placeholder="o que você quer ouvir hoje?"
             onChange={(e) => setSearch(e.target.value)}
           />
 
