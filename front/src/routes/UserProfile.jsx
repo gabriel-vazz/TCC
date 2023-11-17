@@ -22,6 +22,7 @@ const UserProfile = () => {
   const [songs, setSongs] = useState([])
   const [followers, setFollowers] = useState([])
   const [playlists, setPlaylists] = useState([])
+  const [likedSongs, setLikedSongs] = useState([])
 
   const [friends, setFriends] = useState([])
 
@@ -77,6 +78,10 @@ const UserProfile = () => {
       } else {
         setPlaylists(response.data)
       }
+    })
+
+    axios.get('http://localhost:3000/users/me/songs/liked').then((response) => {
+      setLikedSongs(response.data)
     })
   }, [])
 
@@ -184,6 +189,32 @@ const UserProfile = () => {
               CRIAR PLAYLIST
             </button>
           </Link>
+
+          <div className="profileSongs">
+            :: músicas curtidas ({likedSongs.length}) ::
+          </div>
+
+          <div className="columnSongList">
+            {likedSongs.map((song) => {
+              return (
+                <div style={{marginLeft: -25}}>
+                  <div className="genreColumnSong">
+                    <Link to={`/song/${song.id}`} style={{ textDecoration: 'none' }}>
+                      <div className="columnSongInfo">
+                        <img
+                          src={`http://localhost:3000/sources/${song.capa}`}
+                          height={60} width={60}
+                        />
+
+                        <div className="columnSongName">
+                          {song.artista} - {song.nome}
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div> 
+              )})}
+            </div>
         </div>
 
         <div className="friends">

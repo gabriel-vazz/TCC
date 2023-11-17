@@ -6,7 +6,7 @@ const mysql = require('mysql2')
 const db = mysql.createPool({
   host: '127.0.0.1',
   user: 'root',
-  password: '',
+  password: 'gabriel200612',
   database: 'stuff',
   multipleStatements: true
 })
@@ -230,6 +230,58 @@ router.get('/me/playlists', (req, res) => {
       res.json({ msg: 'suas playlists criadas aparecerão aqui.' })
     } else {
       res.json(result)
+    }
+  })
+})
+
+router.get('/me/songs/liked', (req, res) => {
+  const user = req.session.user[0].id
+
+  const sql = 
+    `SELECT 
+      musica.id, musica.idusuario,
+      musica.nome, musica.capa,
+      usuario.nome AS artista
+    FROM musica 
+  
+    JOIN curtida ON curtida.idcurtido = musica.id
+    JOIN usuario ON usuario.id = musica.idusuario
+  
+    WHERE curtida.idcurtiu = ?`
+
+  db.query(sql, user, (err, result) => {
+    if(err) {
+      console.log(err)
+      res.sendStatus(500)
+    }
+    res.json(result)
+  })
+})
+
+router.get('/:id/songs/liked', (req, res) => {
+  const id = req.params.id
+
+  const sql = 
+    `SELECT 
+      musica.id, musica.idusuario,
+      musica.nome, musica.capa,
+      usuario.nome AS artista
+    FROM musica 
+  
+    JOIN curtida ON curtida.idcurtido = musica.id
+    JOIN usuario ON usuario.id = musica.idusuario
+  
+    WHERE curtida.idcurtiu = ?`
+
+  db.query(sql, id, (err, result) => {
+    if(err) {
+      console.log(err)
+      res.sendStatus(500)
+    }
+    if(result.length) {
+      res.json(result)
+    } else {
+      res.json({ msg: 'nenhuma música curtida.' })
     }
   })
 })

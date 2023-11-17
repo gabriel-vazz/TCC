@@ -11,6 +11,7 @@ import { FaMusic } from 'react-icons/fa'
 import AddSongToPlaylist from '../components/AddSongToPlaylist'
 import Header from '../components/Header'
 import Like from '../components/Like'
+import Flag from '../components/Flag'
 
 const Search = () => {
 
@@ -31,17 +32,13 @@ const Search = () => {
   }
 
   const [userSearch, setUserSearch] = useState()
-  const [songSearch, setSongSearch] = useState()
   const userSearchButtonStyle = {
     color: '#fff0aa', 
     height: 20, width: 20
   }
-  const songSearchButtonStyle = {
-    color: '#fff0aa', 
-    height: 30, width: 30
-  }
 
   const navigate = useNavigate()
+
   useEffect(() => {
     axios.get('http://localhost:3000/genres').then((response) => {
       setGenres(response.data)
@@ -65,34 +62,15 @@ const Search = () => {
     return (
       <div>
         <Header />
-
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div>a</div>
-          <div className="searchField" style={{textAlign: 'right'}}>
-            
-            <input
-              className="searchInput"
-              placeholder="o que você quer ouvir hoje?"
-              onChange={(e) => setSongSearch(e.target.value)}
-            />
-            <br/><br/><br/><br/><br/><br/>
-            <button
-              onClick={() => {if(songSearch) {navigate(`/search/songs/${songSearch}`)}}}
-              className="searchButton"
-            >
-              <AiOutlineSearch style={songSearchButtonStyle} />
-            </button>
-          </div>
-        </div>
         
         <div className="home">
-          <div className="columnSongList" style={{marginTop: -40}}>
-          <div 
-            className="resultMessage"
-            style={{marginLeft: 0, marginTop: -80, marginBottom: 75}}
-          >
-            exibindo resultados para "{search}":
-          </div>
+          <div className="columnSongList" >
+            <div 
+              className="resultMessage"
+              style={{ marginLeft: 0, marginBottom: 25 }}
+            >
+              exibindo resultados para "{search}":
+            </div>
 
             {songs.filter((song) => {
               return song.nome.toLowerCase().includes(search.toLowerCase())
@@ -138,7 +116,7 @@ const Search = () => {
             }     
           </div>
           
-          <div className="genreLinks">
+          <div className="genreLinks" style={{marginTop: 80}}>
             <div className="genres">:: gêneros ::</div>
             {genres.map((genre) => {
               return (
@@ -180,7 +158,10 @@ const Search = () => {
                     style={{ textDecoration: 'none', color: '#fff0aa'}}
                     to={`/profile/${user.id}`}
                   >
-                    {user.nome}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginRight: 15}}>
+                      {user.nome} <Flag code={user.pais} />
+                    </div>
+                    
                     <div className="columnUserDescription">
                       {user.descricao}
                     </div>
@@ -191,7 +172,7 @@ const Search = () => {
           </div>
 
           <div className="friends">
-            <div style={{marginTop: -60, marginRight: 30}}>
+            <div style={{ marginTop: -60, marginRight: 30 }}>
               :: seguido por você ::<br/>
             
               <div className="searchUserContainer">
