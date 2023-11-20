@@ -17,6 +17,7 @@ const Profile = () => {
   const [songs, setSongs] = useState([])
   const [followers, setFollowers] = useState([])
   const [likedSongs, setLikedSongs] = useState([])
+  const [playlists, setPlaylists] = useState([])
 
   const [followButtonText, setFollowButtonText] = useState()
   const [isFollowed, setIsFollowed] = useState()
@@ -25,6 +26,8 @@ const Profile = () => {
 
   const [message, setMessage] = useState()
   const [likedSongsMessage, setLikedSongsMessage] = useState()
+  const [noSongsMessage, setNoSongsMessage] = useState()
+  const [noPlaylistsMessage, setNoPlaylistsMessage] = useState()
 
   const handleFollowButton = async () => {
     if (!isFollowed) {
@@ -54,8 +57,13 @@ const Profile = () => {
       setProfileName(response.data[0].nome)
     })
     axios.get(`http://localhost:3000/users/${id}/songs`).then((response) => {
-      setSongs(response.data)
+      if(response.data.msg) {
+        setNoSongsMessage(response.data.msg)
+      } else {
+        setSongs(response.data)
+      }
     })
+
     axios.get(`http://localhost:3000/users/${id}/follows`).then((response) => {
       setFollowers(response.data)
     })
@@ -74,6 +82,14 @@ const Profile = () => {
         setLikedSongsMessage(response.data.msg)
       } else {
         setLikedSongs(response.data)
+      }
+    })
+
+    axios.get(`http://localhost:3000/users/${id}/playlists`).then((response) => {
+      if(response.data.msg) {
+        setNoPlaylistsMessage(response.data.msg)
+      } else {
+        setPlaylists(response.data)
       }
     })
   }, [])
@@ -118,10 +134,6 @@ const Profile = () => {
             <div className="message">{message}</div>
 
             <div className="profileSongs">
-              :: músicas de {profileName} ::
-            </div>
-
-            <div className="profileSongs">
               {songs.map((song) => {
                 return (
                   <div className="profileSong">
@@ -144,27 +156,42 @@ const Profile = () => {
                 ) 
               })}
             </div>
-          </div>
-          
-          <div className="columnSongList" style={{ marginRight: 15 }}>
-            <div 
-              className="profileSongs"
-              style={{ marginTop: -20, fontSize: 20, marginLeft: 50}}
-            >
-              :: músicas curtidas por {profileName} ::
+
+            <div className="profilePlaylists">
+              :: playlists criadas por {profileName} ::
             </div>
 
             <div 
-              className="message"
-              style={{ textAlign: 'center', marginLeft: 50 }}
+              className="playlistsContainer" 
+              style={{ width: 725, marginTop: 10 }}
             >
-              {likedSongsMessage}
+              {playlists.map((playlist) => {
+                return (
+                  <Link 
+                    to={`/playlist/${playlist.id}`} 
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <div className="playlist">
+                      {playlist.nome}
+                    </div>
+                  </Link> 
+                )
+              })}
+            </div>
+
+            <div className="noProfilePlaylistsMessage">{noPlaylistsMessage}</div>
+          </div>
+          
+          
+          <div className="columnSongList" style={{ marginRight: 15 }}>
+            <div className="userLikedSongs">
+              :: músicas curtidas por {profileName} ::
             </div>
 
             {likedSongs.map((song) => {
               return (
                 <div>
-                  <div className="genreColumnSong" style={{width: 400}}>
+                  <div className="genreColumnSong" style={{ width: 400 }}>
                     <Link to={`/song/${song.id}`} style={{ textDecoration: 'none' }}>
                       <div className="columnSongInfo" >
                         <img
@@ -179,8 +206,11 @@ const Profile = () => {
                   </div>
                 </div> 
               )})}
+              <div className="noLikedSongsMessage">{likedSongsMessage}</div>
             </div>
         </div>
+
+        
       </div>
     )
   }

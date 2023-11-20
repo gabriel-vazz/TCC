@@ -6,7 +6,7 @@ const mysql = require('mysql2')
 const db = mysql.createPool({
   host: '127.0.0.1',
   user: 'root',
-  password: 'gabriel200612',
+  password: '',
   database: 'stuff',
   multipleStatements: true
 })
@@ -114,7 +114,11 @@ router.get('/:id/songs', (req, res) => {
       console.log(err)
       res.sendStatus(500)
     }
-    res.json(result)
+    if(result.length) {
+      res.json(result)
+    } else {
+      res.json({ msg: 'este perfil não possui músicas.' })
+    }
   })
 })
 
@@ -230,6 +234,24 @@ router.get('/me/playlists', (req, res) => {
       res.json({ msg: 'suas playlists criadas aparecerão aqui.' })
     } else {
       res.json(result)
+    }
+  })
+})
+
+router.get('/:id/playlists', (req, res) => {
+  const id = req.params.id
+
+  const sql = 'SELECT * FROM playlist WHERE idcriou = ?'
+
+  db.query(sql, id, (err, result) => {
+    if(err) {
+      console.log(err)
+      res.sendStatus(500)
+    }
+    if(result.length) {
+      res.json(result)
+    } else {
+      res.json({ msg: 'este perfil não possui playlists.' })
     }
   })
 })

@@ -7,7 +7,7 @@ const path = require('path')
 const db = mysql.createPool({
   host: '127.0.0.1',
   user: 'root',
-  password: 'gabriel200612',
+  password: '',
   database: 'stuff',
   multipleStatements: true
 })
@@ -100,7 +100,7 @@ router.post('/comments', (req, res) => {
   const sql = 'INSERT INTO comentario(texto, idcomentou, idcomentado) VALUES (?,?,?)'
 
   if (!comment) {
-    res.json({ msg: 'por favor, escreva seu comentário' })
+    res.json({ msg: 'por favor, escreva seu comentário.' })
   } else {
     db.query(sql, [comment, user, id], (err, result) => {
       if (err) {

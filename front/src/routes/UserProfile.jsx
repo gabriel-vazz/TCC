@@ -36,11 +36,20 @@ const UserProfile = () => {
     height: 40, width: 40, 
     marginTop: 5
   }
+  const deletePlaylistIconStyle = {
+    color: '#ff6969', 
+    height: 35, width: 35, 
+    marginTop: 10, marginRight: 5
+  }
 
   const [search, setSearch] = useState()
   const searchButtonStyle = {
     color: '#fff0aa', 
     height: 20, width: 20
+  }
+
+  const handleDeletePlaylist = async(id) => {
+    await axios.delete(`http://localhost:3000/playlists/${id}`)
   }
 
   const navigate = useNavigate()
@@ -99,7 +108,7 @@ const UserProfile = () => {
                 {followers.length} seguidores, {songs.length} músicas
               </div>
 
-              <div className="profileDescription">{description}</div>
+              <div className="userProfileDescription">{description}</div>
             </div>
 
             <div style={{ 
@@ -157,7 +166,7 @@ const UserProfile = () => {
             })}
           </div>
 
-          <div className="noSongMessage">{noSongMessage}</div>
+          <div className="noSongsMessage">{noSongMessage}</div>
 
           <Link to='/post'>
             <button className="loginButton">
@@ -165,33 +174,48 @@ const UserProfile = () => {
             </button>
           </Link>
 
-          <div className="profileSongs">:: suas playlists ::</div>
+          <div className="profileSongs" style={{ marginBottom: 15 }}>
+            :: suas playlists ::
+          </div>
 
-          <div className="playlistsContainer">
+          <div className="userPlaylistsContainer">
             {playlists.map((playlist) => {
               return (
-                <Link 
-                  to={`/playlist/${playlist.id}`} 
-                  style={{ textDecoration: 'none' }}
-                >
-                  <div className="playlist">
-                    {playlist.nome}
-                  </div>
-                </Link> 
+                <div style={{
+                  display: 'flex', 
+                  justifyContent: 'space-between',
+                  
+                }}>
+                  <Link 
+                    to={`/playlist/${playlist.id}`} 
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <div className="playlist">
+                      {playlist.nome}
+                    </div>
+                  </Link> 
+
+                  <button 
+                    className="deleteSongButton"
+                    onClick={() => handleDeletePlaylist(playlist.id)}
+                  >
+                    <BsFillTrashFill style={deletePlaylistIconStyle}/>
+                  </button>
+                </div>
               )
             })}
           </div>
-
-          <div className="noPlaylistsMessage">{noPlaylistsMessage}</div>
+          
+          <div className="noProfileePlaylistsMessage">{noPlaylistsMessage}</div>
 
           <Link to='/playlist/new'>
-            <button className="loginButton">
+            <button className="loginButton" style={{marginTop: -3}}>
               CRIAR PLAYLIST
             </button>
           </Link>
 
           <div className="profileSongs">
-            :: músicas curtidas ({likedSongs.length}) ::
+            :: músicas curtidas por você ({likedSongs.length})  ::
           </div>
 
           <div className="columnSongList">

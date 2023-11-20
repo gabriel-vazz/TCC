@@ -53,7 +53,16 @@
   font-size: 20px;
   word-wrap: break-word;
   white-space: pre-wrap;
-  width: 525px;
+  width: 720px;
+  margin-bottom: 25px;
+}
+
+.userProfileDescription {
+  color: white;
+  font-size: 20px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  width: 550px;
   margin-bottom: 25px;
 }
 
@@ -87,8 +96,8 @@
 
 .noSongMessage {
   color: gray;
-  font-size: 20px;
-  margin-top: -20px;
+  font-size: 25px;
+  margin-top: -15px;
   margin-bottom: 15px;
 }
 
@@ -104,4 +113,45 @@
   margin-bottom: 30px;
   padding: 8px;
   height: 275px;  
+}
+
+.noSongsMessage {
+  color: gray;
+  font-size: 25px;
+  margin-top: -25px;
+  margin-bottom: 15px;
+}
+
+.userLikedSongs {
+  color: #fff0aa;
+  font-size: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+  margin-top: -15px;
+}
+
+.noLikedSongsMessage {
+  color: gray;
+  font-size: 25px;
+  margin-top: -15px;
+  margin-bottom: 15px;
+  text-align: right;
+}
+
+.profilePlaylists {
+  color: #fff0aa;
+  margin-top: 15px;
+  font-size: 30px;
+}
+
+.noProfilePlaylistsMessage {
+  color: gray;
+  font-size: 25px;
+  margin-top: -10px;
+  margin-bottom: 15px;
+}
+
+.userPlaylistsContainer {
+  padding-bottom: 5px;
+  width: 765px;
 }

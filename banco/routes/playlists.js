@@ -6,7 +6,7 @@ const mysql = require('mysql2')
 const db = mysql.createPool({
   host: '127.0.0.1',
   user: 'root',
-  password: 'gabriel200612',
+  password: '',
   database: 'stuff',
   multipleStatements: true
 })
@@ -29,6 +29,22 @@ router.post('/', (req, res) => {
       res.json({ msg: 'playlist criada com sucesso!' })
     })
   }
+})
+
+router.delete('/:id', (req, res) => {
+  const id = req.params.id
+
+  const sql = 'DELETE FROM musica_playlist WHERE idplaylist = ?'
+
+  db.query(sql, id, (err, result) => {
+    if(err) {
+      console.log(err)
+      res.sendStatus(500)
+    }
+    db.query('DELETE FROM playlist WHERE id = ?', id, (err, result) => {
+      res.sendStatus(200)
+    })
+  })
 })
 
 router.post('/songs', (req, res) => {
