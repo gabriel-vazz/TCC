@@ -6,6 +6,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import Flag from '../components/Flag'
 import Header from '../components/Header'
 
+import '../styles/perfil.css'
 import '../styles/profile.css'
 
 const Profile = () => {
@@ -26,7 +27,6 @@ const Profile = () => {
 
   const [message, setMessage] = useState()
   const [likedSongsMessage, setLikedSongsMessage] = useState()
-  const [noSongsMessage, setNoSongsMessage] = useState()
   const [noPlaylistsMessage, setNoPlaylistsMessage] = useState()
 
   const handleFollowButton = async () => {
@@ -101,7 +101,100 @@ const Profile = () => {
       <div>
         <Header />
 
-        <div className="profilePage">
+        <div className="perfil">
+          <div className="perfilInfo">
+            <div className="perfilNome">
+              {profileData.map((user) => {
+                return (
+                  <div>
+                    <div style={{ display: 'flex' }}>
+                      {user.nome}
+
+                      <div className="perfilPais">
+                        <Flag code={user.pais} />
+                      </div>
+                    </div>
+
+                    <div className="perfilDetalhes">
+                      {followers.length} seguidores, {songs.length} músicas
+                    </div>
+
+                    <div className="perfilDescricao">
+                      {user.descricao}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+            <button
+              className="followProfileButton"
+              onClick={() => handleFollowButton()}
+            >
+              {followButtonText}
+            </button>
+            
+            <div className="perfilCurtidasTitulo">
+              :: músicas curtidas ::
+            </div>
+
+            {likedSongs.map((song) => {
+              return (
+                <div className="perfilCurtidas">
+                  <Link to={`/song/${song.id}`} style={{ textDecoration: 'none', color: 'white' }}>
+                    * {song.artista} - {song.nome}
+                  </Link>
+                </div>
+              )})}
+            <div className="noProfilePlaylistsMessage">{likedSongsMessage}</div>
+
+            <div className="perfilPlaylists">
+              :: playlists ::
+            </div>
+
+            <div>
+              {playlists.map((playlist) => {
+                return (
+                  <Link to={`/playlist/${playlist.id}`} style={{ textDecoration: 'none', color: 'white' }}>
+                    <div className="perfilPlaylist">
+                      {playlist.nome}
+                    </div>
+                  </Link> 
+                )
+              })}
+            </div>
+
+            <div className="noProfilePlaylistsMessage">{noPlaylistsMessage}</div> 
+          </div>
+
+          <div className="perfilMusicas">
+            <div className="profileSongs">
+              {songs.map((song) => {
+                return (
+                  <div className="profileSong">
+                    <div>
+                      <Link to={`/song/${song.id}`} style={{ textDecoration: 'none' }}>
+                        <img
+                          src={`http://localhost:3000/sources/${song.capa}`}
+                          height={180} width={180}
+                        />
+                      </Link>
+                      <div style={{display:'flex', justifyContent: 'space-between'}}>
+                        <div>
+                          <Link to={`/song/${song.id}`} style={{ textDecoration: 'none' }}>
+                            <div className="songName">{song.nome}</div>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div> 
+                ) 
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/*}<div className="profilePage">
           <div className="profile">
             {profileData.map((user) => {
               return (
@@ -208,7 +301,7 @@ const Profile = () => {
               )})}
               <div className="noLikedSongsMessage">{likedSongsMessage}</div>
             </div>
-        </div>
+              </div>{*/}
 
         
       </div>

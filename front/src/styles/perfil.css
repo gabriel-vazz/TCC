@@ -1,0 +1,62 @@
+.perfil {
+    margin-left: 25px;
+    display: flex;
+}
+
+.perfilInfo {
+    width: 380px;
+    margin-right: 35px;
+
+}
+
+.perfilMusicas {
+    margin-top: -15px;
+}
+
+.perfilNome {
+    font-size: 40px;
+    color: #fff0aa;
+}
+
+.perfilDescricao {
+    font-size: 18px;
+    color: white;
+    width: 375px;
+    margin-bottom: 20px;
+}
+
+.perfilDetalhes {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.perfilPlaylists {
+    font-size: 25px;
+    color: #fff0aa;
+    margin-top: 60px;
+    margin-bottom: 5px;
+}
+
+.perfilPais {
+    margin-left: 25px;
+    margin-top: 5px;
+}
+
+.perfilPlaylist {
+    background-color: #0f0916;
+    padding: 8px;
+    margin-bottom: 5px;
+}
+
+.perfilCurtidasTitulo {
+    font-size: 25px;
+    color: #fff0aa;
+    margin-top: 40px;
+    margin-bottom: 5px;
+}
+
+.perfilCurtidas {
+    color: white;
+    font-size: 14px;
+}

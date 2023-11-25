@@ -18,7 +18,7 @@ const playlistsRouter = require('./routes/playlists')
 const db = mysql.createPool({
   host: '127.0.0.1',
   user: 'root',
-  password: '',
+  password: 'gabriel200612',
   database: 'stuff',
   multipleStatements: true
 })
